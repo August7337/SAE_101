@@ -17,40 +17,60 @@ namespace SAE_101
     /// </summary>
     public partial class MainWindow : Window
     {
-        ulong coins = 0;
-        ulong coinsParClick = 1;
+        double argent = 0;
+        double argentParClick = 1;
+        double prixMairie = 10;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void button_Click_Mairie(object sender, RoutedEventArgs e)
         {
-            coins += coinsParClick;
-            label.Content = coins.ToString("C", CultureInfo.CurrentCulture);
+            argent += argentParClick;
+            lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
         }
 
-        private void button_Click_Achat(object sender, RoutedEventArgs e)
+        private void button_Click_Achat_Mairie(object sender, RoutedEventArgs e)
         {
-            if (coins >= 10)
+            if (argent >= prixMairie)
             {
-                coins -= 10;
-                coinsParClick++;
-                label.Content = coins.ToString("C", CultureInfo.CurrentCulture);
+                argent -= prixMairie;
+                argentParClick++;
+                prixMairie = prixMairie * 1.1;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
             }
         }
 
-        private void button_Click_Achat_Max(object sender, RoutedEventArgs e)
+        private void button_Click_Achat_Mairie_Max(object sender, RoutedEventArgs e)
         {
-            if (coins >= 10)
+            if (argent >= prixMairie)
             {
-                coinsParClick += coins / 10;
-                coins %= 10;
+                double achatsMax = Math.Floor(argent / prixMairie);
 
-                label.Content = coins.ToString("C", CultureInfo.CurrentCulture);
-
+                argentParClick += achatsMax;
+                argent -= achatsMax * prixMairie;
+                prixMairie = prixMairie * Math.Pow(1.1, achatsMax);
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
             }
+        }
+
+        private void button_Click_Carriere(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_Click_Achat_Carriere(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_Click_Achat_Carriere_Max(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
