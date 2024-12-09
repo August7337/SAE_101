@@ -1,0 +1,16 @@
+﻿<Window x:Class="SAE_101.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE_101"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="button" Content="" Background="#FF7F7F7F" Margin="317,172,317,172" Click="button_Click"/>
+        <Button x:Name="buttonAchat" Content="Ammelioration click" Background="#FF7F7F7F" Margin="22,380,651,10" Click="button_Click_Achat"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="120,58,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonAchat_Copy" Content="Max" Background="#FF7F7F7F" Margin="167,380,588,10" Click="button_Click_Achat_Max"/>
+
+    </Grid>
+</Window>
