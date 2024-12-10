@@ -28,6 +28,10 @@ namespace SAE_101
         public MainWindow()
         {
             InitializeComponent();
+            Menu menu_accueil = new Menu();
+            menu_accueil.ShowDialog();
+            if (menu_accueil.DialogResult == false)
+                Application.Current.Shutdown();
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
