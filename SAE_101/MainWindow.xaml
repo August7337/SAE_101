@@ -14,24 +14,24 @@
             x:Name="mairie"
             Margin="131,172,503,172"
             Click="button_Click_Mairie"
-            Content="Mairie" >
+            Content="Mairie" Cursor="Hand" >
             <Button.Background>
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        
+
         <Button
             x:Name="buttonAchatMairie"
             Margin="106,280,527,110"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Mairie"
-            Content="Ammelioration 10 $" />
+            Content="Ammelioration 10 $" Cursor="Hand" />
         <Button
             x:Name="buttonAchatMairieMax"
             Margin="278,280,477,110"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Mairie_Max"
-            Content="Max" />
+            Content="Max" Cursor="Hand" />
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label
@@ -60,9 +60,9 @@
                 Content="Vente Pierre 0.5 €" />
         </StackPanel>
 
-            
 
-        
+
+
 
 
 
@@ -71,23 +71,37 @@
             x:Name="carriere"
             Margin="436,89,182,172"
             Click="button_Click_Carriere"
-            Content="" >
+            Content="" Cursor="Hand" >
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="/carriere.png"/>
             </Button.Background>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border>
+                                    <Image Source="/carriere.png" Stretch="Uniform"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
         <Button
             x:Name="buttonAchatCarriere"
             Margin="423,280,210,110"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere"
-            Content="Ammelioration 10 $" />
+            Content="Ammelioration 10 $" Cursor="Hand" />
         <Button
             x:Name="buttonAchatCarriereMax"
             Margin="595,280,160,110"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere_Max"
-            Content="Max" />
-
+            Content="Max" Cursor="Hand" />
+        <Canvas x:Name="canvasAnimation" />
     </Grid>
 </Window>

@@ -6,6 +6,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -70,6 +72,44 @@ namespace SAE_101
         {
             pierre += pierreParClick;
             lab_pierre.Content = pierre.ToString();
+
+            Point position = Mouse.GetPosition(canvasAnimation);
+            AfficherTexte(position, "+" + pierreParClick);
+        }
+
+        private void AfficherTexte(Point position, string texte)
+        {
+            TextBlock texteBlock = new TextBlock
+            {
+                Text = texte,
+                Foreground = new SolidColorBrush(Colors.Black),
+                FontSize = 21,
+                FontWeight = FontWeights.Bold
+            };
+
+            // Ajouter un effet de contour
+            texteBlock.Effect = new DropShadowEffect
+            {
+                Color = Colors.Yellow,
+                BlurRadius = 5,
+                ShadowDepth = 0,
+                Opacity = 1
+            };
+
+            Canvas.SetLeft(texteBlock, position.X + 10);
+            Canvas.SetTop(texteBlock, position.Y - 20);
+            canvasAnimation.Children.Add(texteBlock);
+
+            // Animation de disparition
+            DoubleAnimation animationDisparition = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(1)));
+            animationDisparition.Completed += (s, a) => canvasAnimation.Children.Remove(texteBlock);
+            texteBlock.BeginAnimation(UIElement.OpacityProperty, animationDisparition);
+
+            // Animation de montée
+            TranslateTransform translateTransform = new TranslateTransform();
+            texteBlock.RenderTransform = translateTransform;
+            DoubleAnimation animationMontee = new DoubleAnimation(0, -30, new Duration(TimeSpan.FromSeconds(1)));
+            translateTransform.BeginAnimation(TranslateTransform.YProperty, animationMontee);
         }
 
         private void button_Click_Achat_Carriere(object sender, RoutedEventArgs e)
@@ -100,7 +140,11 @@ namespace SAE_101
 
         private void button_Click_Vente_Pierre(object sender, RoutedEventArgs e)
         {
-            
+            double montantVente = pierre * 0.1;
+            argent += montantVente;
+            pierre = 0;
+            lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+            lab_pierre.Content = pierre.ToString();
         }
     }
 }
