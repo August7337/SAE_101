@@ -21,6 +21,10 @@ namespace SAE_101
         double argentParClick = 1;
         double prixMairie = 10;
 
+        double pierre = 0;
+        double prixCarriere = 5;
+        double pierreParClick = 1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +42,7 @@ namespace SAE_101
             {
                 argent -= prixMairie;
                 argentParClick++;
-                prixMairie = prixMairie * 1.1;
+                prixMairie = prixMairie * 1.25;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
             }
@@ -60,17 +64,39 @@ namespace SAE_101
 
         private void button_Click_Carriere(object sender, RoutedEventArgs e)
         {
-
+            pierre += pierreParClick;
+            lab_pierre.Content = pierre.ToString();
         }
 
         private void button_Click_Achat_Carriere(object sender, RoutedEventArgs e)
         {
-
+            if (argent >= prixCarriere)
+            {
+                argent -= prixCarriere;
+                pierreParClick++;
+                prixCarriere = prixCarriere * 1.25;
+                lab_argent.Content = argent.ToString();
+                buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
+            }
         }
 
         private void button_Click_Achat_Carriere_Max(object sender, RoutedEventArgs e)
         {
+            if (argent >= prixCarriere)
+            {
+                double achatsMax = Math.Floor(argent / prixCarriere);
 
+                argentParClick += achatsMax;
+                argent -= achatsMax * prixCarriere;
+                prixCarriere = prixCarriere * Math.Pow(1.1, achatsMax);
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
+            }
+        }
+
+        private void button_Click_Vente_Pierre(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
