@@ -10,29 +10,6 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <Button
-            x:Name="mairie"
-            Margin="131,172,503,172"
-            Click="button_Click_Mairie"
-            Content="Mairie" Cursor="Hand" >
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-
-        <Button
-            x:Name="buttonAchatMairie"
-            Margin="106,280,527,110"
-            Background="#FFE8E8E8"
-            Click="button_Click_Achat_Mairie"
-            Content="Ammelioration 10 $" Cursor="Hand" />
-        <Button
-            x:Name="buttonAchatMairieMax"
-            Margin="278,280,477,110"
-            Background="#FFE8E8E8"
-            Click="button_Click_Achat_Mairie_Max"
-            Content="Max" Cursor="Hand" />
-
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label
                 x:Name="lab_argent"
@@ -60,11 +37,29 @@
                 Content="Vente Pierre 0.5 €" />
         </StackPanel>
 
+        <Button
+            x:Name="mairie"
+            Margin="131,172,503,172"
+            Click="button_Click_Mairie"
+            Content="Mairie" Cursor="Hand" >
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
 
-
-
-
-
+        <Button
+            x:Name="buttonAchatMairie"
+            Margin="106,280,527,110"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie"
+            Content="Ammelioration 10 $" Cursor="Hand" />
+        <Button
+            x:Name="buttonAchatMairieMax"
+            Margin="278,280,477,110"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie_Max"
+            Content="Max" Cursor="Hand" />
+        <Label Content="Niveau 1" x:Name="labNiveauMairie" Margin="200,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <Button
             BorderThickness="0"
@@ -102,6 +97,7 @@
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere_Max"
             Content="Max" Cursor="Hand" />
+        <Label Content="Niveau 1" x:Name="labNiveauCarriere" Margin="506,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Canvas x:Name="canvasAnimation" />
     </Grid>
 </Window>

@@ -20,10 +20,12 @@ namespace SAE_101
     public partial class MainWindow : Window
     {
         double argent = 0;
+        int niveauMairie = 1;
         double argentParClick = 1;
         double prixMairie = 10;
 
         double pierre = 0;
+        int niveauCarriere = 1;
         double prixCarriere = 5;
         double pierreParClick = 1;
 
@@ -46,11 +48,13 @@ namespace SAE_101
         {
             if (argent >= prixMairie)
             {
+                niveauMairie++;
                 argent -= prixMairie;
                 argentParClick++;
                 prixMairie = prixMairie * 1.25;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
 
@@ -58,13 +62,16 @@ namespace SAE_101
         {
             if (argent >= prixMairie)
             {
-                double achatsMax = Math.Floor(argent / prixMairie);
-
+                int achatsMax = (int)Math.Floor(argent / prixMairie);
+                niveauMairie += achatsMax;
+                Console.WriteLine("achat max mairie : " + achatsMax);
+                Console.WriteLine("lvl mairie : " + niveauMairie);
                 argentParClick += achatsMax;
                 argent -= achatsMax * prixMairie;
                 prixMairie = prixMairie * Math.Pow(1.1, achatsMax);
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
 
@@ -118,9 +125,11 @@ namespace SAE_101
             {
                 argent -= prixCarriere;
                 pierreParClick++;
+                niveauCarriere++;
                 prixCarriere = prixCarriere * 1.25;
                 lab_argent.Content = argent.ToString();
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
             }
         }
 
@@ -128,13 +137,15 @@ namespace SAE_101
         {
             if (argent >= prixCarriere)
             {
-                double achatsMax = Math.Floor(argent / prixCarriere);
-
-                argentParClick += achatsMax;
+                int achatsMax = (int)Math.Floor(argent / prixCarriere);
+                
+                niveauCarriere += achatsMax;
+                pierreParClick += achatsMax;
                 argent -= achatsMax * prixCarriere;
                 prixCarriere = prixCarriere * Math.Pow(1.1, achatsMax);
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
             }
         }
 
