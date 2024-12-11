@@ -11,6 +11,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SAE_101
 {
@@ -28,6 +29,10 @@ namespace SAE_101
         int niveauCarriere = 1;
         double prixCarriere = 5;
         double pierreParClick = 1;
+        int pierreParSeconde = 1;
+        bool pierreAutoActive = false;
+
+        DispatcherTimer pierreTimer;
 
         public MainWindow()
         {
@@ -36,6 +41,16 @@ namespace SAE_101
             menu_accueil.ShowDialog();
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
+
+            pierreTimer = new DispatcherTimer();
+            pierreTimer.Interval = TimeSpan.FromSeconds(1);
+            pierreTimer.Tick += PierreTimerTick;
+        }
+
+        private void PierreTimerTick(object? sender, EventArgs e)
+        {
+            pierre += pierreParSeconde;
+            lab_pierre.Content = pierre.ToString();
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
@@ -130,6 +145,12 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString();
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+
+                if (niveauCarriere >= 10 && pierreAutoActive == false)
+                {
+                    pierreTimer.Start();
+                    pierreAutoActive = true;
+                }
             }
         }
 
@@ -146,6 +167,12 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+
+                if (niveauCarriere >= 10 && pierreAutoActive == false)
+                {
+                    pierreTimer.Start();
+                    pierreAutoActive = true;
+                }
             }
         }
 
