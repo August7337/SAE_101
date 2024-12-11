@@ -14,7 +14,7 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="img/fond accueil.jpg" />
+            <ImageBrush ImageSource="img/menuAccueil.png" />
         </Grid.Background>
         <Button
             x:Name="but_jouer"
@@ -23,14 +23,13 @@
             Margin="0,132,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Background="{x:Null}"
             BorderBrush="Black"
             BorderThickness="3"
             Click="but_jouer_Click"
             Content="Jouer"
             FontSize="36"
-            Foreground="White"
-            RenderTransformOrigin="0.833,0.353" />
+            Foreground="Black"
+            RenderTransformOrigin="0.833,0.353" Background="#84464646" />
         <Button
             x:Name="but_quitter"
             Width="204"
@@ -38,13 +37,13 @@
             Margin="0,216,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Background="{x:Null}"
+            Background="#84464646"
             BorderBrush="Black"
             BorderThickness="3"
             Click="but_quitter_Click"
             Content="Quitter"
             FontSize="36"
-            Foreground="White" />
+            Foreground="Black" />
         <Label
             x:Name="lab_titre"
             HorizontalAlignment="Center"

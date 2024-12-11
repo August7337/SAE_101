@@ -97,6 +97,9 @@
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere_Max"
             Content="Max" Cursor="Hand" />
+        <Canvas x:Name="canvasAnimation" >
+            <Button Content="Button" Canvas.Left="716" Canvas.Top="26" Click="Button_Click"/>
+        </Canvas>
         <Label Content="Niveau 1" x:Name="labNiveauCarriere" Margin="506,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Canvas x:Name="canvasAnimation" />
     </Grid>

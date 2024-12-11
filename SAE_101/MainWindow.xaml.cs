@@ -184,5 +184,16 @@ namespace SAE_101
             lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             lab_pierre.Content = pierre.ToString();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            magasin menu_magasin = new magasin();
+            menu_magasin.ShowDialog();
+            if (menu_magasin.DialogResult == true)
+            {
+
+            }    
+
+        }
     }
 }
