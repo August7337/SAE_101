@@ -21,14 +21,14 @@ namespace SAE_101
     public partial class magasin : Window
     {
         static readonly double PRIX_PIERRE = 0.5;
-        static readonly double PRIX_BOIS = 0;
-        static readonly double PRIX_METAL = 0;
-        static readonly double PRIX_CIMENT = 0;
-        static readonly double PRIX_FUTUR = 0;
+        static readonly double PRIX_BOIS = 1;
+        static readonly double PRIX_METAL = 2;
+        static readonly double PRIX_CIMENT = 5;
+        static readonly double PRIX_FUTUR = 10;
 
-        int quantite = 0;
-        public double argent;
-        public double pierre;
+        int quantite = 1,indice;
+        public double argent,ressource,prixVente;
+        public double[] ressources;
         double prixTotal = 0;
 
         public magasin()
@@ -36,62 +36,89 @@ namespace SAE_101
             InitializeComponent();
             box_qte.Text = quantite.ToString();
             quantite = 0;
-            
+
 
         }
 
         private void but_vendre_Click(object sender, RoutedEventArgs e)
         {
-            string materiaux = ((ComboBoxItem)this.liste_materiaux.SelectedItem).Content.ToString(); 
-            Console.WriteLine(materiaux);
-            if (pierre  - quantite < 0)
+            if (liste_materiaux.SelectedItem == null)
             {
-                MessageBox.Show(this, "Vous n'avez pas assez de " + materiaux, "Quantité insufisante", MessageBoxButton.OK, MessageBoxImage.Warning);
-                
+                MessageBox.Show(this,"Erreur, vous n'avez sélectionné aucune ressource","Erreur",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (quantite < 1)
+            {
+                MessageBox.Show(this,"Erreur, la quantité doit être supérieur ou égale à 1", "Erreur de plage", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
+                string materiaux = ((ComboBoxItem)this.liste_materiaux.SelectedItem).Content.ToString();
+                Console.WriteLine(materiaux);
                 switch (materiaux)
                 {
                     case "pierre":
-                        prixTotal += quantite * PRIX_PIERRE;
+                        indice = 0;
+                        ressource = ressources[indice];
+                        prixVente = PRIX_PIERRE;
                         break;
                     case "bois":
-                        prixTotal += quantite * PRIX_BOIS;
+                        indice = 1;
+                        ressource = ressources[indice];
+                        prixVente = PRIX_BOIS;
                         break;
                     case "metal":
-                        prixTotal += quantite * PRIX_METAL;
+                        indice = 2;
+                        ressource = ressources[indice];
+                        prixVente = PRIX_METAL;
                         break;
                     case "ciment":
-                        prixTotal  += quantite * PRIX_CIMENT;
+                        indice = 3;
+                        ressource = ressources[indice];
+                        prixVente = PRIX_CIMENT;
                         break;
                     case "futur":
-                        prixTotal  += quantite * PRIX_FUTUR;
+                        indice = 4;
+                        ressource = ressources[indice];
+                        prixVente = PRIX_FUTUR;
                         break;
                 }
-                pierre -= quantite;
-                Console.WriteLine(pierre);
-                Console.WriteLine(quantite);
+                if (ressource - quantite < 0)
+                {
+                    MessageBox.Show(this, "Vous n'avez pas assez de " + materiaux, "Quantité insufisante", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+                else
+                {
+                    prixTotal = quantite * prixVente;
+                    ressource -= quantite;
+                    ressources[indice] = ressource;
+                    Console.WriteLine(ressource);
+                    Console.WriteLine(quantite);
 
 
-                MessageBox.Show(this,"Argent gagné: " + prixTotal  + "€","Vendu !",MessageBoxButton.OK, MessageBoxImage.Information);
-                argent = prixTotal;
-                this.DialogResult = true;
+                    MessageBox.Show(this, "Argent gagné: " + prixTotal + "$", "Vendu !", MessageBoxButton.OK, MessageBoxImage.Information);
+                    argent = prixTotal;
+                    Console.WriteLine("arg" + argent);
+                    for (int i = 0; i < ressources.Length; i++)
+                    {
+                        Console.Write(ressources[i] + ",");
+                    }
+
+                    this.DialogResult = true;
+                }
             }
-            
-
-
         }
+            
 
         private void but_plus_Click(object sender, RoutedEventArgs e)
         {
-            quantite =  int.Parse(box_qte.Text) + 1;
+            quantite = int.Parse(box_qte.Text) + 1;
             box_qte.Text = quantite.ToString();
         }
 
         private void but_moins_Click(object sender, RoutedEventArgs e)
         {
-            if (quantite > 0)
+            if (quantite > 1)
             {
                 quantite = int.Parse(box_qte.Text) - 1;
                 box_qte.Text = quantite.ToString();
@@ -99,10 +126,6 @@ namespace SAE_101
             }
         }
 
-        private void liste_materiaux_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void box_qte_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -113,5 +136,7 @@ namespace SAE_101
         {
 
         }
+
+
     }
 }
