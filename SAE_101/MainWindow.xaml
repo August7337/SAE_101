@@ -18,7 +18,7 @@
                 x:Name="lab_argent"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="0 $" />
+                Content="0 €" />
 
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
 
@@ -71,7 +71,7 @@
             Margin="432,354,392,122"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Mairie"
-            Content="Ammelioration 10 $" Cursor="Hand" />
+            Content="Ammelioration 10 €" Cursor="Hand" />
         <Button
             x:Name="buttonAchatMairieMax"
             Margin="573,354,333,122"
@@ -106,7 +106,7 @@
             Margin="653,354,161,122"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere"
-            Content="Ammelioration 10 $" Cursor="Hand" />
+            Content="Ammelioration 10 €" Cursor="Hand" />
         <Button
             x:Name="buttonAchatCarriereMax"
             Margin="806,354,86,122"

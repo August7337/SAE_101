@@ -42,7 +42,7 @@ namespace SAE_101
 
         private void but_vendre_Click(object sender, RoutedEventArgs e)
         {
-            if (liste_materiaux.SelectedItem == null)
+            if (liste_materiaux.SelectedItem == null) // condition vérifiant si l'utilisateur à bien choisi une resssource
             {
                 MessageBox.Show(this,"Erreur, vous n'avez sélectionné aucune ressource","Erreur",MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -54,7 +54,7 @@ namespace SAE_101
             {
                 string materiaux = ((ComboBoxItem)this.liste_materiaux.SelectedItem).Content.ToString();
                 Console.WriteLine(materiaux);
-                switch (materiaux)
+                switch (materiaux)  // switch permettant de connaître la ressource que l'utilisateur souhaite vendre
                 {
                     case "pierre":
                         indice = 0;
@@ -92,8 +92,7 @@ namespace SAE_101
                     prixTotal = quantite * prixVente;
                     ressource -= quantite;
                     ressources[indice] = ressource;
-                    Console.WriteLine(ressource);
-                    Console.WriteLine(quantite);
+;
 
 
                     MessageBox.Show(this, "Argent gagné: " + prixTotal + "€", "Vendu !", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -104,7 +103,7 @@ namespace SAE_101
                         Console.Write(ressources[i] + ",");
                     }
 
-                    this.DialogResult = true;
+                    this.DialogResult = true; // la fenêtre se ferme et les changements sont appliqués dans la MainWindow
                 }
             }
         }
@@ -113,7 +112,7 @@ namespace SAE_101
         private void but_plus_Click(object sender, RoutedEventArgs e)
         {
             quantite = int.Parse(box_qte.Text) + 1;
-            box_qte.Text = quantite.ToString();
+            box_qte.Text = quantite.ToString();   
         }
 
 
@@ -130,7 +129,7 @@ namespace SAE_101
 
         private void box_qte_LostFocus(object sender, RoutedEventArgs e)
         {
-            quantite = int.Parse(box_qte.Text);
+            quantite = int.Parse(box_qte.Text); // une fois la quantité entrée, dès que l'on va cliquer sur un autre bouton de la fenêtre, la variable quantité contiendra la valeur entrée dans la box de quantité
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

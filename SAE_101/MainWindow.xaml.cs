@@ -43,7 +43,7 @@ namespace SAE_101
         {
             InitializeComponent();
             Menu menu_accueil = new Menu();
-            menu_accueil.ShowDialog();
+            menu_accueil.ShowDialog(); // appel et afichage de la fenêtre menu d'acccueil
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
             InitMinuteur();
