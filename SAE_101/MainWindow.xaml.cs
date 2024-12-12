@@ -64,8 +64,8 @@ namespace SAE_101
 
             if (conteurCarriere >= 20 && niveauCarriere >= 10)
             {
-                pierre += pierreParSeconde;
-                lab_pierre.Content = pierre.ToString();
+                ressources[0] += pierreParSeconde;
+                lab_pierre.Content = ressources[0].ToString();
 
                 Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
                 AfficherTexte(relativePosition, "+" + pierreParSeconde);
@@ -205,11 +205,11 @@ namespace SAE_101
 
         private void button_Click_Vente_Pierre(object sender, RoutedEventArgs e)
         {
-            double montantVente = pierre * 0.1;
+            double montantVente = ressources[0] * 0.1;
             argent += montantVente;
-            pierre = 0;
+            ressources[0] = 0;
             lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
-            lab_pierre.Content = pierre.ToString();
+            lab_pierre.Content = ressources[0].ToString();
         }
 
         private void but_marche_Click(object sender, RoutedEventArgs e)
