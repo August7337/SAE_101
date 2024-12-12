@@ -6,9 +6,12 @@
     xmlns:local="clr-namespace:SAE_101"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="800"
-    Height="450"
-    mc:Ignorable="d" KeyDown="Window_KeyDown">
+    Width="960"
+    Height="540"
+    mc:Ignorable="d" KeyDown="Window_KeyDown" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="/img/background.png" Stretch="Fill"/>
+    </Window.Background>
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label
@@ -34,7 +37,7 @@
                 x:Name="buttonVentePierre"
                 Background="#FFE8E8E8"
                 Click="button_Click_Vente_Pierre"
-                Content="Vente Pierre 0.5 €" />
+                Content="Vente Pierre 0.5 €" Cursor="Hand" />
             <Button
                 x:Name="btnClassement"
                 Background="#FFE8E8E8"
@@ -43,38 +46,11 @@
         </StackPanel>
 
         <Button
-            x:Name="mairie"
-            Margin="131,172,503,172"
-            Click="button_Click_Mairie"
-            Content="Mairie" Cursor="Hand" >
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
-
-        <Button
-            x:Name="buttonAchatMairie"
-            Margin="106,280,527,110"
-            Background="#FFE8E8E8"
-            Click="button_Click_Achat_Mairie"
-            Content="Ammelioration 10 $" Cursor="Hand" />
-        <Button
-            x:Name="buttonAchatMairieMax"
-            Margin="278,280,477,110"
-            Background="#FFE8E8E8"
-            Click="button_Click_Achat_Mairie_Max"
-            Content="Max" Cursor="Hand" />
-        <Label Content="Niveau 1" x:Name="labNiveauMairie" Margin="200,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-        <Button
             BorderThickness="0"
-            x:Name="carriere"
-            Margin="436,89,182,172"
-            Click="button_Click_Carriere"
+            x:Name="mairie"
+            Margin="200,250,150,175"
+            Click="button_Click_Mairie"
             Content="" Cursor="Hand" >
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="/carriere.png"/>
-            </Button.Background>
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -82,7 +58,46 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Border>
-                                    <Image Source="/carriere.png" Stretch="Uniform"/>
+                                    <Image Source="/img/mairie.png" Stretch="Uniform" Margin="202,0,246,0"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+
+
+
+
+        <Button
+            x:Name="buttonAchatMairie"
+            Margin="432,354,392,122"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie"
+            Content="Ammelioration 10 $" Cursor="Hand" />
+        <Button
+            x:Name="buttonAchatMairieMax"
+            Margin="573,354,333,122"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie_Max"
+            Content="Max" Cursor="Hand" />
+        <Label Content="Niveau 1" x:Name="labNiveauMairie" Margin="494,402,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <Button
+            BorderThickness="0"
+            x:Name="carriere"
+            Margin="700,225,150,170"
+            Click="button_Click_Carriere"
+            Content="" Cursor="Hand" >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border>
+                                    <Image Source="/img/carriere.png" Stretch="Fill" Cursor=""/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -92,20 +107,20 @@
         </Button>
         <Button
             x:Name="buttonAchatCarriere"
-            Margin="423,280,210,110"
+            Margin="653,354,161,122"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere"
             Content="Ammelioration 10 $" Cursor="Hand" />
         <Button
             x:Name="buttonAchatCarriereMax"
-            Margin="595,280,160,110"
+            Margin="806,354,86,122"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Carriere_Max"
             Content="Max" Cursor="Hand" />
+        <Label Content="Niveau 1" x:Name="labNiveauCarriere" Margin="753,407,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="50" Height="25" HorizontalAlignment="Center" Margin="0,-370,0,0"/>
 
-        <Label Content="Niveau 1" x:Name="labNiveauCarriere" Margin="506,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Canvas x:Name="canvasAnimation" />
     </Grid>
 </Window>
