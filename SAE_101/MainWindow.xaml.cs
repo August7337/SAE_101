@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace SAE_101
 {
@@ -44,13 +47,16 @@ namespace SAE_101
 
             pierreTimer = new DispatcherTimer();
             pierreTimer.Interval = TimeSpan.FromSeconds(1);
-            pierreTimer.Tick += PierreTimerTick;
+            pierreTimer.Tick += PierreTimerTick;            
         }
 
         private void PierreTimerTick(object? sender, EventArgs e)
         {
             pierre += pierreParSeconde;
             lab_pierre.Content = pierre.ToString();
+
+            Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
+            AfficherTexte(relativePosition, "+" + pierreParSeconde);
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
@@ -72,7 +78,7 @@ namespace SAE_101
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
-
+    
         private void button_Click_Achat_Mairie_Max(object sender, RoutedEventArgs e)
         {
             if (argent >= prixMairie)
@@ -145,6 +151,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString();
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+                pierreParSeconde = niveauCarriere / 10;
 
                 if (niveauCarriere >= 10 && pierreAutoActive == false)
                 {
@@ -167,6 +174,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+                pierreParSeconde = niveauCarriere / 10;
 
                 if (niveauCarriere >= 10 && pierreAutoActive == false)
                 {
@@ -198,6 +206,12 @@ namespace SAE_101
                 argent += menu_magasin.argent;
                 lab_argent.Content = argent + "$";
             }
+        }
+
+        private void btn_Click_Classement(object sender, RoutedEventArgs e)
+        {
+            Classement menu_classement = new Classement();
+            menu_classement.ShowDialog();
         }
     }
 }
