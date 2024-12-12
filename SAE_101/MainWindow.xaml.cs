@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace SAE_101
 {
@@ -44,7 +47,7 @@ namespace SAE_101
 
             pierreTimer = new DispatcherTimer();
             pierreTimer.Interval = TimeSpan.FromSeconds(1);
-            pierreTimer.Tick += PierreTimerTick;
+            pierreTimer.Tick += PierreTimerTick;            
         }
 
         private void PierreTimerTick(object? sender, EventArgs e)
@@ -72,7 +75,7 @@ namespace SAE_101
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
-
+    
         private void button_Click_Achat_Mairie_Max(object sender, RoutedEventArgs e)
         {
             if (argent >= prixMairie)
@@ -194,6 +197,12 @@ namespace SAE_101
 
             }    
 
+        }
+
+        private void btn_Click_Classement(object sender, RoutedEventArgs e)
+        {
+            Classement menu_classement = new Classement();
+            menu_classement.ShowDialog();
         }
     }
 }
