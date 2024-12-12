@@ -28,7 +28,7 @@ namespace SAE_101
         double argentParClick = 1;
         double prixMairie = 10;
 
-        double pierre = 0;
+        double pierre = 0, bois = 0, metal = 0, ciment = 0, futur = 0;
         int niveauCarriere = 1;
         double prixCarriere = 5;
         double pierreParClick = 1;
@@ -200,13 +200,18 @@ namespace SAE_101
             lab_pierre.Content = pierre.ToString();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void but_marche_Click(object sender, RoutedEventArgs e)
         {
             magasin menu_magasin = new magasin();
+            menu_magasin.pierre = pierre;
+            menu_magasin.argent = argent;
             menu_magasin.ShowDialog();
             if (menu_magasin.DialogResult == true)
             {
-
+                pierre = menu_magasin.pierre;
+                lab_pierre.Content = pierre;
+                argent += menu_magasin.argent;
+                lab_argent.Content = argent + "$";
             }
         }
 
