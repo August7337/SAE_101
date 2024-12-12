@@ -28,7 +28,7 @@ namespace SAE_101
         double argentParClick = 1;
         double prixMairie = 10;
 
-        double pierre = 0, bois = 0, metal = 0, ciment = 0, futur = 0;
+        double[] ressources = [0,50,10,25,7];
         int niveauCarriere = 1;
         double prixCarriere = 5;
         double pierreParClick = 1;
@@ -52,8 +52,8 @@ namespace SAE_101
 
         private void PierreTimerTick(object? sender, EventArgs e)
         {
-            pierre += pierreParSeconde;
-            lab_pierre.Content = pierre.ToString();
+            ressources[0] += pierreParSeconde;
+            lab_pierre.Content = ressources[0].ToString();
 
             Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
             AfficherTexte(relativePosition, "+" + pierreParSeconde);
@@ -98,8 +98,8 @@ namespace SAE_101
 
         private void button_Click_Carriere(object sender, RoutedEventArgs e)
         {
-            pierre += pierreParClick;
-            lab_pierre.Content = pierre.ToString();
+            ressources[0] += pierreParClick;
+            lab_pierre.Content = ressources[0].ToString();
 
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + pierreParClick);
@@ -184,25 +184,17 @@ namespace SAE_101
             }
         }
 
-        private void button_Click_Vente_Pierre(object sender, RoutedEventArgs e)
-        {
-            double montantVente = pierre * 0.1;
-            argent += montantVente;
-            pierre = 0;
-            lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
-            lab_pierre.Content = pierre.ToString();
-        }
 
         private void but_marche_Click(object sender, RoutedEventArgs e)
         {
             magasin menu_magasin = new magasin();
-            menu_magasin.pierre = pierre;
+            menu_magasin.ressources = ressources; 
             menu_magasin.argent = argent;
             menu_magasin.ShowDialog();
             if (menu_magasin.DialogResult == true)
             {
-                pierre = menu_magasin.pierre;
-                lab_pierre.Content = pierre;
+                ressources = menu_magasin.ressources;
+                lab_pierre.Content = ressources[0];
                 argent += menu_magasin.argent;
                 lab_argent.Content = argent + "$";
             }

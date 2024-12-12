@@ -30,11 +30,7 @@
                     VerticalAlignment="Top"
                     Content="0"/>
             </StackPanel>
-            <Button
-                x:Name="buttonVentePierre"
-                Background="#FFE8E8E8"
-                Click="button_Click_Vente_Pierre"
-                Content="Vente Pierre 0.5 €" />
+            
             <Button
                 x:Name="btnClassement"
                 Background="#FFE8E8E8"
