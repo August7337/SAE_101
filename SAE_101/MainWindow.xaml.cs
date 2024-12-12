@@ -223,7 +223,7 @@ namespace SAE_101
                 ressources = menu_magasin.ressources;
                 lab_pierre.Content = ressources[0];
                 argent += menu_magasin.argent;
-                lab_argent.Content = argent + "$";
+                lab_argent.Content = argent + "€";
             }
         }
 
