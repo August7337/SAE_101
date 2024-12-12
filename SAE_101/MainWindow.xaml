@@ -98,7 +98,7 @@
             Click="button_Click_Achat_Carriere_Max"
             Content="Max" Cursor="Hand" />
 
-        <Button Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="Button_Click" Width="50" Height="25" HorizontalAlignment="Center" Margin="0,-370,0,0"/>
+        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="50" Height="25" HorizontalAlignment="Center" Margin="0,-370,0,0"/>
 
         <Label Content="Niveau 1" x:Name="labNiveauCarriere" Margin="506,333,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Canvas x:Name="canvasAnimation" />
