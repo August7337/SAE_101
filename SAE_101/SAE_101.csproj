@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="carriere.png" />
     <None Remove="img\background.png" />
+    <None Remove="img\magasinImage.jpg" />
+    <None Remove="img\magasinMenu.png" />
     <None Remove="img\mairie.png" />
     <None Remove="img\menuAccueil.png" />
   </ItemGroup>
@@ -18,6 +20,8 @@
   <ItemGroup>
     <Resource Include="img\background.png" />
     <Resource Include="img\carriere.png" />
+    <Resource Include="img\magasinImage.jpg" />
+    <Resource Include="img\magasinMenu.png" />
     <Resource Include="img\mairie.png" />
     <Resource Include="img\menuAccueil.png" />
   </ItemGroup>

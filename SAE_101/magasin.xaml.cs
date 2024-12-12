@@ -35,7 +35,7 @@ namespace SAE_101
         {
             InitializeComponent();
             box_qte.Text = quantite.ToString();
-            quantite = 0;
+            quantite = 1;
 
 
         }
@@ -96,7 +96,7 @@ namespace SAE_101
                     Console.WriteLine(quantite);
 
 
-                    MessageBox.Show(this, "Argent gagné: " + prixTotal + "$", "Vendu !", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(this, "Argent gagné: " + prixTotal + "€", "Vendu !", MessageBoxButton.OK, MessageBoxImage.Information);
                     argent = prixTotal;
                     Console.WriteLine("arg" + argent);
                     for (int i = 0; i < ressources.Length; i++)
@@ -115,6 +115,7 @@ namespace SAE_101
             quantite = int.Parse(box_qte.Text) + 1;
             box_qte.Text = quantite.ToString();
         }
+
 
         private void but_moins_Click(object sender, RoutedEventArgs e)
         {
