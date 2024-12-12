@@ -54,6 +54,9 @@ namespace SAE_101
         {
             pierre += pierreParSeconde;
             lab_pierre.Content = pierre.ToString();
+
+            Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
+            AfficherTexte(relativePosition, "+" + pierreParSeconde);
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
@@ -148,6 +151,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString();
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+                pierreParSeconde = niveauCarriere / 10;
 
                 if (niveauCarriere >= 10 && pierreAutoActive == false)
                 {
@@ -170,6 +174,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
+                pierreParSeconde = niveauCarriere / 10;
 
                 if (niveauCarriere >= 10 && pierreAutoActive == false)
                 {
