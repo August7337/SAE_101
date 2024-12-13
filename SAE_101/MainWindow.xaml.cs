@@ -129,6 +129,7 @@ namespace SAE_101
                 argent -= prixMairie;
                 argentParClick++;
                 prixMairie = prixMairie * 1.25;
+                argentParSecond = niveauMairie;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatMairie.Content = "Ammelioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
@@ -146,7 +147,7 @@ namespace SAE_101
                 argent -= totalCost;
                 argentParClick += achatsMax;
                 prixMairie = prixMairie * Math.Pow(1.25, achatsMax);
-                argentParSecond = niveauMairie / 10;
+                argentParSecond = niveauMairie;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Amélioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
@@ -173,7 +174,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Ammelioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
-                pierreParSeconde = niveauCarriere / 10;
+                pierreParSeconde = niveauCarriere;
             }
         }
 
@@ -188,7 +189,7 @@ namespace SAE_101
                 argent -= totalCost;
                 pierreParClick += achatsMax;
                 prixCarriere = prixCarriere * Math.Pow(1.25, achatsMax);
-                pierreParSeconde = niveauCarriere / 10;
+                pierreParSeconde = niveauCarriere;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
                 buttonAchatCarriere.Content = "Amélioration " + prixCarriere.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauCarriere.Content = "Niveau " + niveauCarriere.ToString();
