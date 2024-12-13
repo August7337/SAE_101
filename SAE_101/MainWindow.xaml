@@ -31,7 +31,7 @@
                     x:Name="lab_pierre"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="0"/>
+                    Content="0" Cursor=""/>
             </StackPanel>
             
             <Button
@@ -46,7 +46,7 @@
             x:Name="mairie"
             Margin="200,250,150,175"
             Click="button_Click_Mairie"
-            Content="" Cursor="Hand" >
+            Content="" Cursor="Hand" Width="154" >
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -54,7 +54,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Border>
-                                    <Image Source="/img/mairie.png" Stretch="Uniform" Margin="202,0,246,0"/>
+                                    <Image Source="/img/mairie.png" Stretch="Uniform" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -85,7 +85,7 @@
             x:Name="carriere"
             Margin="700,225,150,170"
             Click="button_Click_Carriere"
-            Content="" Cursor="Hand" >
+            Content="" Cursor="Hand" Height="110" >
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -93,7 +93,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Border>
-                                    <Image Source="/img/carriere.png" Stretch="Fill" Cursor=""/>
+                                    <Image Source="/img/carriere.png" Stretch="Uniform" Cursor=""/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
