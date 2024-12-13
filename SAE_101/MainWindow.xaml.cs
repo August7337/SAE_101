@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.Media;
+using System.Security.Cryptography;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SAE_101
 {
@@ -38,6 +41,9 @@ namespace SAE_101
         DispatcherTimer minuteur;
         int conteurCarriere = 0;
         int conteurMairie = 0;
+        private static MediaPlayer musique;
+        double volume =0.5;
+
 
         public MainWindow()
         {
@@ -47,6 +53,27 @@ namespace SAE_101
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
             InitMinuteur();
+        }
+
+        public static void InitMusique()
+        {
+            musique = new MediaPlayer();
+            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "sons/musiqueFond.mp3"));
+            musique.MediaEnded += RelanceMusique;
+            musique.Play();
+        }
+
+        private static void RelanceMusique(object? sender, EventArgs e)
+        {
+            musique.Position = TimeSpan.Zero;
+            musique.Play();
+        }
+
+       
+
+        public static void VolumeMusique(double volume)
+        {
+            musique.Volume = volume/100;
         }
 
         private void InitMinuteur()
@@ -233,7 +260,7 @@ namespace SAE_101
             menu_classement.ShowDialog();
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, KeyEventArgs e) // code de triche ctrl+g
         {
             if (e.Key == Key.G && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
@@ -241,5 +268,7 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
         }
+
+        
     }
 }
