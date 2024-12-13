@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,10 +20,15 @@ namespace SAE_101
     /// </summary>
     public partial class Menu : Window
     {
+        double volume = 50;
+        bool premierPassage = true;
+
         public Menu()
         {
             InitializeComponent();
         }
+
+
 
         private void but_jouer_Click(object sender, RoutedEventArgs e)
         {
@@ -32,6 +38,19 @@ namespace SAE_101
         private void but_quitter_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+        }
+
+        private void barre_volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(premierPassage == true)
+            {
+                MainWindow.InitMusique();
+                premierPassage = false;
+            }
+            Console.WriteLine(volume);
+            volume = barre_volume.Value;
+            MainWindow.VolumeMusique(volume);
+
         }
     }
 }

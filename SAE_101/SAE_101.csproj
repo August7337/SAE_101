@@ -26,4 +26,10 @@
     <Resource Include="img\menuAccueil.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="sons\musiqueFond.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

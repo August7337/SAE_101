@@ -31,14 +31,82 @@
                     x:Name="lab_pierre"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="0" Cursor=""/>
+                    Content="0"/>
+
+
             </StackPanel>
-            
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Bois : " />
+
+                <Label
+                    x:Name="lab_bois"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="0"/>
+
+
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Métal : " />
+
+                <Label
+                    x:Name="lab_metal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="0"/>
+
+
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Ciment : " />
+
+                <Label
+                    x:Name="lab_ciment"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="0"/>
+
+
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+
+                <Label
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Futur : " />
+
+                <Label
+                    x:Name="lab_futur"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="0"/>
+
+
+            </StackPanel>
+
             <Button
                 x:Name="btnClassement"
                 Background="#FFE8E8E8"
                 Click="btn_Click_Classement"
                 Content="Classement" />
+
+
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0">
@@ -114,7 +182,7 @@
             <Label Content="Niveau 1" x:Name="labNiveauCarriere" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="50" Height="25" HorizontalAlignment="Center" Margin="0,-370,0,0"/>
+        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="85" HorizontalAlignment="Center" Margin="0,10,0,473"/>
 
         <Canvas x:Name="canvasAnimation" />
     </Grid>

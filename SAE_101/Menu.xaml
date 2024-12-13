@@ -54,13 +54,24 @@
             Foreground="Black" />
         <Label
             x:Name="lab_version"
-            Margin="314,338,0,0"
+            Margin="309,333,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             BorderBrush="Black"
             Content="version 1.0"
             Foreground="White"
-            RenderTransformOrigin="0.329,0.464" />
+            RenderTransformOrigin="0.329,0.464" Background="#84000000" />
+        <Slider x:Name="barre_volume" HorizontalAlignment="Left" Margin="8,340,0,0" VerticalAlignment="Top" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="11.31"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-1.8"/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Label x:Name="lab_volume" Content="Volume" HorizontalAlignment="Left" Margin="38,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.541" Background="#84000000" Foreground="White"/>
 
     </Grid>
 </Window>
