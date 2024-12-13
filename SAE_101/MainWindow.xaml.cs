@@ -122,7 +122,7 @@ namespace SAE_101
                 prixMairie = prixMairie * Math.Pow(1.25, achatsMax);
                 argentParSecond = niveauMairie;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
-                buttonAchatCarriere.Content = "Amélioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatMairie.Content = "Amélioration " + prixMairie.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
