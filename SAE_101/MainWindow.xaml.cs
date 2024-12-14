@@ -33,14 +33,24 @@ namespace SAE_101
         double prixMairie = 10;
 
         double[] ressources = [0,50,10,25,7];
+
         int niveauCarriere = 1;
         double prixCarriere = 5;
         double pierreParClick = 1;
         int pierreParSeconde = 1;
 
+        int niveauDecharge = 1;
+        double prixDecharge = 20;
+        int metalParClick = 1;
+        int metalParSecond = 1;
+
+        int niveauScierie = 1;
+        double prixScierie = 15;
+        int boisParClick = 1;
+        int boisParSecond = 1;
+
         DispatcherTimer minuteur;
-        int conteurCarriere = 0;
-        int conteurMairie = 0;
+        int conteur = 0;
         private static MediaPlayer musique;
         double volume =0.5;
 
@@ -86,29 +96,47 @@ namespace SAE_101
 
         private void minuteurTick(object? sender, EventArgs e)
         {
-            conteurCarriere++;
-            conteurMairie++;
+            conteur++;
 
-            if (conteurCarriere >= 20 && niveauCarriere >= 10)
+            if (conteur >= 20)
             {
-                ressources[0] += pierreParSeconde;
-                lab_pierre.Content = ressources[0].ToString();
+                if (niveauMairie >= 10)
+                {
+                    argent += argentParSecond;
+                    lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
 
-                Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
-                AfficherTexte(relativePosition, "+" + pierreParSeconde);
+                    Point relativePosition = mairie.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + argentParSecond + " €");
+                }
 
-                conteurCarriere = 0;
-            }
+                if (niveauCarriere >= 10)
+                {
+                    ressources[0] += pierreParSeconde;
+                    lab_pierre.Content = ressources[0].ToString();
 
-            if (conteurMairie >= 20 && niveauMairie >= 10)
-            {
-                argent += argentParSecond;
-                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                    Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + pierreParSeconde);
+                }
 
-                Point relativePosition = mairie.TransformToAncestor(this).Transform(new Point(0, 0));
-                AfficherTexte(relativePosition, "+" + argentParSecond + " €");
+                if (niveauScierie >= 10)
+                {
+                    ressources[1] += boisParSecond;
+                    lab_bois.Content = ressources[1].ToString();
 
-                conteurMairie = 0;
+                    Point relativePosition = scierie.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + boisParSecond);
+                }
+
+                if (niveauDecharge >= 10)
+                {
+                    ressources[2] += metalParSecond;
+                    lab_metal.Content = ressources[2].ToString();
+
+                    Point relativePosition = decharge.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + metalParSecond);
+                }
+
+                conteur = 0;
             }
         }
 
@@ -263,6 +291,7 @@ namespace SAE_101
 
         private void Window_KeyDown(object sender, KeyEventArgs e) // code de triche ctrl+g
         {
+            //Code de triche
             if (e.Key == Key.G && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 argent += 100000;
@@ -270,6 +299,88 @@ namespace SAE_101
             }
         }
 
-        
+        private void button_Click_Decharge(object sender, RoutedEventArgs e)
+        {
+            ressources[2] += metalParClick;
+            lab_metal.Content = ressources[2].ToString();
+
+            Point position = Mouse.GetPosition(canvasAnimation);
+            AfficherTexte(position, "+" + metalParClick);
+        }
+
+        private void button_Click_Achat_Decharge(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixDecharge)
+            {
+                argent -= prixDecharge;
+                metalParClick++;
+                niveauDecharge++;
+                prixDecharge = prixDecharge * 1.25;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatDecharge.Content = "Ammelioration " + prixDecharge.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauDecharge.Content = "Niveau " + niveauDecharge.ToString();
+                metalParSecond = niveauDecharge;
+            }
+        }
+
+        private void button_Click_Achat_Decharge_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixDecharge)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (argent * (1 - 1.25)) / prixDecharge) / Math.Log(1.25));
+                double totalCost = prixDecharge * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25);
+
+                niveauDecharge += achatsMax;
+                argent -= totalCost;
+                metalParClick += achatsMax;
+                prixDecharge = prixDecharge * Math.Pow(1.25, achatsMax);
+                metalParSecond = niveauDecharge;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatDecharge.Content = "Amélioration " + prixDecharge.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauDecharge.Content = "Niveau " + niveauDecharge.ToString();
+            }
+        }
+
+        private void button_Click_Scierie(object sender, RoutedEventArgs e)
+        {
+            ressources[1] += metalParClick;
+            lab_metal.Content = ressources[2].ToString();
+
+            Point position = Mouse.GetPosition(canvasAnimation);
+            AfficherTexte(position, "+" + metalParClick);
+        }
+
+        private void button_Click_Achat_Scierie(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixScierie)
+            {
+                argent -= prixScierie;
+                boisParClick++;
+                niveauScierie++;
+                prixScierie = prixScierie * 1.25;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatScierie.Content = "Ammelioration " + prixScierie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauScierie.Content = "Niveau " + niveauScierie.ToString();
+                boisParSecond = niveauScierie;
+            }
+        }
+
+        private void button_Click_Achat_Scierie_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixScierie)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (argent * (1 - 1.25)) / prixScierie) / Math.Log(1.25));
+                double totalCost = prixScierie * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25);
+
+                niveauScierie += achatsMax;
+                argent -= totalCost;
+                boisParClick += achatsMax;
+                prixScierie = prixScierie * Math.Pow(1.25, achatsMax);
+                boisParSecond = niveauScierie;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatScierie.Content = "Amélioration " + prixScierie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauScierie.Content = "Niveau " + niveauScierie.ToString();
+            }
+        }
     }
 }

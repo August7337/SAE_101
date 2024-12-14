@@ -109,12 +109,12 @@
 
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200,145,0,0">
             <Button
-                BorderThickness="0"
-                x:Name="mairie"
-                Click="button_Click_Mairie"
-                Content="" Cursor="Hand" Width="154" >
+        BorderThickness="0"
+        x:Name="mairie"
+        Click="button_Click_Mairie"
+        Content="" Cursor="Hand" Width="120" >
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -133,25 +133,62 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                 <Button
-                    x:Name="buttonAchatMairie"
-                    Background="#FFE8E8E8"
-                    Click="button_Click_Achat_Mairie"
-                    Content="Ammelioration 10 €" Cursor="Hand" />
+            x:Name="buttonAchatMairie"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie"
+            Content="Ammelioration 10 €" Cursor="Hand" />
                 <Button
-                    x:Name="buttonAchatMairieMax"
-                    Background="#FFE8E8E8"
-                    Click="button_Click_Achat_Mairie_Max"
-                    Content="Max" Cursor="Hand" />
+            x:Name="buttonAchatMairieMax"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Mairie_Max"
+            Content="Max" Cursor="Hand" />
             </StackPanel>
             <Label Content="Niveau 1" x:Name="labNiveauMairie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,145,0,0">
+            <Button
+                BorderThickness="0"
+                x:Name="decharge"
+                Click="button_Click_Decharge"
+                Content="" Cursor="Hand" Width="120" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="400,120,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button
+                    x:Name="buttonAchatDecharge"
+                    Background="#FFE8E8E8"
+                    Click="button_Click_Achat_Decharge"
+                    Content="Ammelioration 10 €" Cursor="Hand" />
+                <Button
+                    x:Name="buttonAchatDechargeMax"
+                    Background="#FFE8E8E8"
+                    Click="button_Click_Achat_Decharge_Max"
+                    Content="Max" Cursor="Hand" />
+            </StackPanel>
+            <Label Content="Niveau 1" x:Name="labNiveauDecharge" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="800,110,0,0">
             <Button
                 BorderThickness="0"
                 x:Name="carriere"
                 Click="button_Click_Carriere"
-                Content="" Cursor="Hand" Height="110" >
+                Content="" Cursor="Hand" Width="120" >
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -180,6 +217,42 @@
                     Content="Max" Cursor="Hand" />
             </StackPanel>
             <Label Content="Niveau 1" x:Name="labNiveauCarriere" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-800,110,0,0">
+            <Button
+                BorderThickness="0"
+                x:Name="scierie"
+                Click="button_Click_Scierie"
+                Content="" Cursor="Hand" Width="120" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <Image Source="/img/carriere.png" Stretch="Uniform" Cursor=""/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button
+            x:Name="buttonAchatScierie"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Scierie"
+            Content="Ammelioration 10 €" Cursor="Hand" />
+                <Button
+            x:Name="buttonAchatScierieMax"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Scierie_Max"
+            Content="Max" Cursor="Hand" />
+            </StackPanel>
+            <Label Content="Niveau 1" x:Name="labNiveauScierie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
         <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="85" HorizontalAlignment="Center" Margin="0,10,0,473"/>
