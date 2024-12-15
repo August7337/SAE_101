@@ -145,7 +145,7 @@
             </StackPanel>
             <Label Content="Niveau 1" x:Name="labNiveauMairie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
-        
+
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,145,0,0">
             <Button
                 BorderThickness="0"
@@ -255,8 +255,95 @@
             <Label Content="Niveau 1" x:Name="labNiveauScierie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-100,145,0,0">
+            <Button
+        BorderThickness="0"
+        x:Name="cimenterie"
+        Click="button_Click_Cimenterie"
+        Content="" Cursor="Hand" Width="120" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button
+            x:Name="buttonAchatCimenterie"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Cimenterie"
+            Content="Ammelioration 10 €" Cursor="Hand" />
+                <Button
+            x:Name="buttonAchatCimenterieMax"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Cimenterie_Max"
+            Content="Max" Cursor="Hand" />
+            </StackPanel>
+            <Label Content="Niveau 1" x:Name="labNiveauCimenterie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-400,145,0,0">
+            <Button
+        BorderThickness="0"
+        x:Name="futuriste"
+        Click="button_Click_Futuriste"
+        Content="" Cursor="Hand" Width="120" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Button
+            x:Name="buttonAchatFuturiste"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Futuriste"
+            Content="Ammelioration 10 €" Cursor="Hand" />
+                <Button
+            x:Name="buttonAchatFuturisteMax"
+            Background="#FFE8E8E8"
+            Click="button_Click_Achat_Futuriste_Max"
+            Content="Max" Cursor="Hand" />
+            </StackPanel>
+            <Label Content="Niveau 1" x:Name="labNiveauFuturiste" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+
         <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="85" HorizontalAlignment="Center" Margin="0,10,0,473"/>
 
-        <Canvas x:Name="canvasAnimation" />
+        <Canvas x:Name="canvasAnimation" >
+            <Slider x:Name="barre_volume" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50" HorizontalAlignment="Left" Canvas.Left="15" Canvas.Top="472" VerticalAlignment="Top">
+                <Slider.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="11.31"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-1.8"/>
+                    </TransformGroup>
+                </Slider.RenderTransform>
+            </Slider>
+            <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="50" Canvas.Top="442" VerticalAlignment="Center"/>
+            <Button Content="Button" Canvas.Left="542" Canvas.Top="10" Height="39" Width="88" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Canvas>
     </Grid>
 </Window>

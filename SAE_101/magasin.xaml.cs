@@ -26,7 +26,8 @@ namespace SAE_101
         static readonly double PRIX_CIMENT = 5;
         static readonly double PRIX_FUTUR = 10;
 
-        int quantite = 1,indice;
+        int quantite = 1;
+        public int indice;
         public double argent,ressource,prixVente;
         public double[] ressources;
         double prixTotal = 0;

@@ -21,8 +21,6 @@ namespace SAE_101
     public partial class Menu : Window
     {
         double volume = 50;
-        bool premierPassage = true;
-
         public Menu()
         {
             InitializeComponent();
@@ -42,11 +40,6 @@ namespace SAE_101
 
         private void barre_volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(premierPassage == true)
-            {
-                MainWindow.InitMusique();
-                premierPassage = false;
-            }
             Console.WriteLine(volume);
             volume = barre_volume.Value;
             MainWindow.VolumeMusique(volume);

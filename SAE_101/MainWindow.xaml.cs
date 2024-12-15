@@ -32,7 +32,7 @@ namespace SAE_101
         int argentParSecond = 1;
         double prixMairie = 10;
 
-        double[] ressources = [0,50,10,25,7];
+        double[] ressources = [0,0,0,0,0];
 
         int niveauCarriere = 1;
         double prixCarriere = 5;
@@ -49,10 +49,22 @@ namespace SAE_101
         int boisParClick = 1;
         int boisParSecond = 1;
 
+        int niveauCimenterie = 1;
+        double prixCimenterie = 30;
+        int cimentParClick = 1;
+        int cimentParSecond = 1;
+
+        int niveauFuturiste = 1;
+        double prixFuturiste = 30;
+        int futurParClick = 1;
+        int futurParSecond = 1;
+
         DispatcherTimer minuteur;
         int conteur = 0;
         private static MediaPlayer musique;
-        double volume =0.5;
+        double volume = 50;
+        bool premierPassage = true;
+
 
 
         public MainWindow()
@@ -84,6 +96,17 @@ namespace SAE_101
         public static void VolumeMusique(double volume)
         {
             musique.Volume = volume/100;
+        }
+
+        private void barre_volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (premierPassage == true)
+            {
+                MainWindow.InitMusique();
+                premierPassage = false;
+            }
+            volume = barre_volume.Value;
+            VolumeMusique(volume);
         }
 
         private void InitMinuteur()
@@ -134,6 +157,24 @@ namespace SAE_101
 
                     Point relativePosition = decharge.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + metalParSecond);
+                }
+
+                if (niveauCimenterie >= 10)
+                {
+                    ressources[3] += cimentParSecond;
+                    lab_ciment.Content = ressources[3].ToString();
+
+                    Point relativePosition = cimenterie.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + cimentParSecond);
+                }
+
+                if (niveauFuturiste >= 10)
+                {
+                    ressources[4] += futurParSecond;
+                    lab_futur.Content = ressources[4].ToString();
+
+                    Point relativePosition = futuriste.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + futurParSecond);
                 }
 
                 conteur = 0;
@@ -277,9 +318,31 @@ namespace SAE_101
             if (menu_magasin.DialogResult == true)
             {
                 ressources = menu_magasin.ressources;
-                lab_pierre.Content = ressources[0];
                 argent += menu_magasin.argent;
                 lab_argent.Content = argent + "€";
+            }
+
+            switch (menu_magasin.indice)
+            {
+                case 0:
+                    lab_pierre.Content = ressources[0];
+                    break;
+                case 1:
+                    lab_bois.Content = ressources[1];
+                    break;
+                case 2:
+                    lab_metal.Content = ressources[2];
+                    break;
+                case 3:
+                    lab_ciment.Content = ressources[3];
+                    break;
+                case 4:
+                    lab_futur.Content = ressources[4];
+                    break;
+                default:
+                    Console.WriteLine("Erreur");
+                    break;
+
             }
         }
 
@@ -344,10 +407,10 @@ namespace SAE_101
         private void button_Click_Scierie(object sender, RoutedEventArgs e)
         {
             ressources[1] += metalParClick;
-            lab_metal.Content = ressources[2].ToString();
+            lab_bois.Content = ressources[1].ToString();
 
             Point position = Mouse.GetPosition(canvasAnimation);
-            AfficherTexte(position, "+" + metalParClick);
+            AfficherTexte(position, "+" + boisParClick);
         }
 
         private void button_Click_Achat_Scierie(object sender, RoutedEventArgs e)
@@ -382,5 +445,91 @@ namespace SAE_101
                 labNiveauScierie.Content = "Niveau " + niveauScierie.ToString();
             }
         }
+
+        private void button_Click_Cimenterie(object sender, RoutedEventArgs e)
+        {
+            ressources[3] += cimentParClick;
+            lab_ciment.Content = ressources[3].ToString();
+
+            Point position = Mouse.GetPosition(canvasAnimation);
+            AfficherTexte(position, "+" + cimentParClick);
+        }
+
+        private void button_Click_Achat_Cimenterie(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixCimenterie)
+            {
+                argent -= prixCimenterie;
+                cimentParClick++;
+                niveauCimenterie++;
+                prixCimenterie = prixCimenterie * 1.25;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatCimenterie.Content = "Ammelioration " + prixCimenterie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauCimenterie.Content = "Niveau " + niveauCimenterie.ToString();
+                cimentParSecond = niveauCimenterie;
+            }
+        }
+
+        private void button_Click_Achat_Cimenterie_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixCimenterie)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (argent * (1 - 1.25)) / prixCimenterie) / Math.Log(1.25));
+                double totalCost = prixCimenterie * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25);
+
+                niveauCimenterie += achatsMax;
+                argent -= totalCost;
+                cimentParClick += achatsMax;
+                prixCimenterie = prixCimenterie * Math.Pow(1.25, achatsMax);
+                cimentParSecond = niveauCimenterie;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatCimenterie.Content = "Amélioration " + prixCimenterie.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauCimenterie.Content = "Niveau " + niveauCimenterie.ToString();
+            }
+        }
+
+        private void button_Click_Futuriste(object sender, RoutedEventArgs e)
+        {
+            ressources[4] += futurParClick;
+            lab_futur.Content = ressources[4].ToString();
+
+            Point position = Mouse.GetPosition(canvasAnimation);
+            AfficherTexte(position, "+" + futurParClick);
+        }
+
+        private void button_Click_Achat_Futuriste(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixFuturiste)
+            {
+                argent -= prixFuturiste;
+                futurParClick++;
+                niveauFuturiste++;
+                prixFuturiste = prixFuturiste * 1.25;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatFuturiste.Content = "Ammelioration " + prixFuturiste.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauFuturiste.Content = "Niveau " + niveauFuturiste.ToString();
+                futurParSecond = niveauFuturiste;
+            }
+        }
+
+        private void button_Click_Achat_Futuriste_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixFuturiste)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (argent * (1 - 1.25)) / prixFuturiste) / Math.Log(1.25));
+                double totalCost = prixFuturiste * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25);
+
+                niveauFuturiste += achatsMax;
+                argent -= totalCost;
+                futurParClick += achatsMax;
+                prixFuturiste = prixFuturiste * Math.Pow(1.25, achatsMax);
+                futurParSecond = niveauFuturiste;
+                lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
+                buttonAchatFuturiste.Content = "Amélioration " + prixFuturiste.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauFuturiste.Content = "Niveau " + niveauFuturiste.ToString();
+            }
+        }
+
+
     }
 }
