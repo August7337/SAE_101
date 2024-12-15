@@ -173,7 +173,7 @@
                     x:Name="buttonAchatDecharge"
                     Background="#FFE8E8E8"
                     Click="button_Click_Achat_Decharge"
-                    Content="Ammelioration 10 €" Cursor="Hand" />
+                    Content="Ammelioration 20 €" Cursor="Hand" />
                 <Button
                     x:Name="buttonAchatDechargeMax"
                     Background="#FFE8E8E8"
@@ -209,7 +209,7 @@
                     x:Name="buttonAchatCarriere"
                     Background="#FFE8E8E8"
                     Click="button_Click_Achat_Carriere"
-                    Content="Ammelioration 10 €" Cursor="Hand" />
+                    Content="Ammelioration 5 €" Cursor="Hand" />
                 <Button
                     x:Name="buttonAchatCarriereMax"
                     Background="#FFE8E8E8"
@@ -245,7 +245,7 @@
             x:Name="buttonAchatScierie"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Scierie"
-            Content="Ammelioration 10 €" Cursor="Hand" />
+            Content="Ammelioration 15 €" Cursor="Hand" />
                 <Button
             x:Name="buttonAchatScierieMax"
             Background="#FFE8E8E8"
@@ -282,7 +282,7 @@
             x:Name="buttonAchatCimenterie"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Cimenterie"
-            Content="Ammelioration 10 €" Cursor="Hand" />
+            Content="Ammelioration 30 €" Cursor="Hand" />
                 <Button
             x:Name="buttonAchatCimenterieMax"
             Background="#FFE8E8E8"
@@ -319,7 +319,7 @@
             x:Name="buttonAchatFuturiste"
             Background="#FFE8E8E8"
             Click="button_Click_Achat_Futuriste"
-            Content="Ammelioration 10 €" Cursor="Hand" />
+            Content="Ammelioration 50 €" Cursor="Hand" />
                 <Button
             x:Name="buttonAchatFuturisteMax"
             Background="#FFE8E8E8"
@@ -329,7 +329,10 @@
             <Label Content="Niveau 1" x:Name="labNiveauFuturiste" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="85" HorizontalAlignment="Center" Margin="0,10,0,473"/>
+        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40"/>
+        <Button x:Name="but_defense" Content="Magasin de protection" Canvas.Left="542" Canvas.Top="10" Height="40" Width="135" HorizontalAlignment="Left" VerticalAlignment="Top" Click="but_defense_Click" Margin="512,11,0,0"/>
+
+
 
         <Canvas x:Name="canvasAnimation" >
             <Slider x:Name="barre_volume" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50" HorizontalAlignment="Left" Canvas.Left="15" Canvas.Top="472" VerticalAlignment="Top">
@@ -343,7 +346,7 @@
                 </Slider.RenderTransform>
             </Slider>
             <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="50" Canvas.Top="442" VerticalAlignment="Center"/>
-            <Button Content="Button" Canvas.Left="542" Canvas.Top="10" Height="39" Width="88" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
+
     </Grid>
 </Window>

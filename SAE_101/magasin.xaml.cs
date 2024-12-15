@@ -31,6 +31,7 @@ namespace SAE_101
         public double argent,ressource,prixVente;
         public double[] ressources;
         double prixTotal = 0;
+        bool verifSaisie;
 
         public magasin()
         {
@@ -46,6 +47,10 @@ namespace SAE_101
             if (liste_materiaux.SelectedItem == null) // condition vérifiant si l'utilisateur à bien choisi une resssource
             {
                 MessageBox.Show(this,"Erreur, vous n'avez sélectionné aucune ressource","Erreur",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!verifSaisie)
+            {
+                MessageBox.Show(this, "Erreur, la quantité doit être un nombre entier", "Erreur de saisie", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (quantite < 1)
             {
@@ -112,7 +117,11 @@ namespace SAE_101
 
         private void but_plus_Click(object sender, RoutedEventArgs e)
         {
-            quantite = int.Parse(box_qte.Text) + 1;
+            verifSaisie = int.TryParse(box_qte.Text,out quantite);
+            if (verifSaisie)
+            {
+                quantite++;
+            }    
             box_qte.Text = quantite.ToString();   
         }
 
@@ -121,7 +130,11 @@ namespace SAE_101
         {
             if (quantite > 1)
             {
-                quantite = int.Parse(box_qte.Text) - 1;
+                verifSaisie = int.TryParse(box_qte.Text,out quantite);
+                if (verifSaisie)
+                {
+                    quantite--;
+                }
                 box_qte.Text = quantite.ToString();
 
             }
@@ -130,7 +143,7 @@ namespace SAE_101
 
         private void box_qte_LostFocus(object sender, RoutedEventArgs e)
         {
-            quantite = int.Parse(box_qte.Text); // une fois la quantité entrée, dès que l'on va cliquer sur un autre bouton de la fenêtre, la variable quantité contiendra la valeur entrée dans la box de quantité
+            verifSaisie = int.TryParse(box_qte.Text, out quantite); // une fois la quantité entrée, dès que l'on va cliquer sur un autre bouton de la fenêtre, la variable quantité contiendra la valeur entrée dans la box de quantité
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

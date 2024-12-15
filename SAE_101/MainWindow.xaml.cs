@@ -39,15 +39,15 @@ namespace SAE_101
         double pierreParClick = 1;
         int pierreParSeconde = 1;
 
-        int niveauDecharge = 1;
-        double prixDecharge = 20;
-        int metalParClick = 1;
-        int metalParSecond = 1;
-
         int niveauScierie = 1;
         double prixScierie = 15;
         int boisParClick = 1;
         int boisParSecond = 1;
+
+        int niveauDecharge = 1;
+        double prixDecharge = 20;
+        int metalParClick = 1;
+        int metalParSecond = 1;
 
         int niveauCimenterie = 1;
         double prixCimenterie = 30;
@@ -55,7 +55,7 @@ namespace SAE_101
         int cimentParSecond = 1;
 
         int niveauFuturiste = 1;
-        double prixFuturiste = 30;
+        double prixFuturiste = 50;
         int futurParClick = 1;
         int futurParSecond = 1;
 
@@ -346,6 +346,17 @@ namespace SAE_101
             }
         }
 
+        private void but_defense_Click(object sender, RoutedEventArgs e)
+        {
+            defense menu_defense = new defense();
+            menu_defense.ShowDialog();
+
+            if(menu_defense.DialogResult == true)
+            {
+                Console.WriteLine("Exit");
+            }
+        }
+
         private void btn_Click_Classement(object sender, RoutedEventArgs e)
         {
             Classement menu_classement = new Classement();
@@ -530,6 +541,6 @@ namespace SAE_101
             }
         }
 
-
+        
     }
 }
