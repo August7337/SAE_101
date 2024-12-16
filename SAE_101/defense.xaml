@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_101"
         mc:Ignorable="d"
-        Title="Magasin de protection" Height="400" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Magasin de protection" Height="400" Width="400" Icon="/img/shop.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="/img/menuMagasinProtection.png"/>
     </Window.Background>

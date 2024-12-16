@@ -8,6 +8,7 @@
     Title="Village Tycoon"
     Width="960"
     Height="540"
+    Icon="/img/village.ico"
     mc:Ignorable="d" KeyDown="Window_KeyDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="/img/background.png" Stretch="Fill"/>

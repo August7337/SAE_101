@@ -45,5 +45,13 @@ namespace SAE_101
             MainWindow.VolumeMusique(volume);
 
         }
+
+        private void menu_accueil_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                but_jouer_Click(sender, e); // l'ppui sur la touche entrer équivaut à cliquer sur le bouton jouer 
+            }
+        }
     }
 }

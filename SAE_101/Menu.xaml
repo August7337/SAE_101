@@ -9,9 +9,10 @@
     Title="Menu principal"
     Width="400"
     Height="400"
+    Icon="/img/demarrer.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" KeyDown="menu_accueil_KeyDown">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="img/menuAccueil.png" />

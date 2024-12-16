@@ -1,5 +1,5 @@
 ﻿<Window x:Name="marche"
-    x:Class="SAE_101.Magasin"
+    x:Class="SAE_101.Marche"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,9 +8,10 @@
     Title="Magasin"
     Width="400"
     Height="400"
+    Icon="/img/sacEnPapier.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" KeyDown="marche_KeyDown">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/img/magasinMenu.png"/>
@@ -38,11 +39,11 @@
             Margin="100,138,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top">
-            <ComboBoxItem Content="pierre" />
-            <ComboBoxItem Content="bois" />
-            <ComboBoxItem Content="metal" />
-            <ComboBoxItem Content="ciment" />
-            <ComboBoxItem Content="futur" />
+            <ComboBoxItem Content="Pierre (0.5€)" />
+            <ComboBoxItem Content="Bois (1€)" />
+            <ComboBoxItem Content="Métal (2€)" />
+            <ComboBoxItem Content="Ciment (5€)" />
+            <ComboBoxItem Content="Futur (10€)" />
         </ComboBox>
         <Button
             x:Name="but_moins"
@@ -81,10 +82,10 @@
             Margin="150,181,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            LostFocus="box_qte_LostFocus"
             Text=""
             TextAlignment="Center"
             TextWrapping="Wrap" />
+        <Button x:Name="but_max_vente" Content="Max" HorizontalAlignment="Left" Margin="316,181,0,0" VerticalAlignment="Top" Width="40" Height="30" Background="#FF2500C3" Foreground="Black" Click="but_max_vente_Click"/>
 
     </Grid>
 </Window>
