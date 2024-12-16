@@ -146,7 +146,7 @@
             <Label Content="Niveau 1" x:Name="labNiveauMairie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,145,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="500,105,0,0">
             <Button
                 BorderThickness="0"
                 x:Name="decharge"
@@ -159,7 +159,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border>
-                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                        <Image Source="/img/decharge.png" Stretch="Uniform" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -219,7 +219,7 @@
             <Label Content="Niveau 1" x:Name="labNiveauCarriere" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-800,110,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-800,145,0,0">
             <Button
                 BorderThickness="0"
                 x:Name="scierie"
@@ -232,7 +232,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border>
-                                        <Image Source="/img/carriere.png" Stretch="Uniform" Cursor=""/>
+                                        <Image Source="/img/scierie.png" Stretch="Uniform" Cursor=""/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -255,7 +255,7 @@
             <Label Content="Niveau 1" x:Name="labNiveauScierie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-100,145,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-100,105,0,0">
             <Button
         BorderThickness="0"
         x:Name="cimenterie"
@@ -268,7 +268,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border>
-                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                        <Image Source="/img/cimenterie.png" Stretch="Uniform" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -292,7 +292,7 @@
             <Label Content="Niveau 1" x:Name="labNiveauCimenterie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-400,145,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-400,105,0,0">
             <Button
         BorderThickness="0"
         x:Name="futuriste"
@@ -305,7 +305,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border>
-                                        <Image Source="/img/mairie.png" Stretch="Uniform" />
+                                        <Image Source="/img/futuriste.png" Stretch="Uniform" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

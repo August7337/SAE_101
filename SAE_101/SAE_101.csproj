@@ -11,21 +11,29 @@
   <ItemGroup>
     <None Remove="carriere.png" />
     <None Remove="img\background.png" />
+    <None Remove="img\cimenterie.png" />
+    <None Remove="img\decharge.png" />
+    <None Remove="img\futuriste.png" />
     <None Remove="img\magasinImage.jpg" />
     <None Remove="img\magasinMenu.png" />
     <None Remove="img\mairie.png" />
     <None Remove="img\menuAccueil.png" />
     <None Remove="img\menuMagasinProtection.png" />
+    <None Remove="img\scierie.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="img\background.png" />
     <Resource Include="img\carriere.png" />
+    <Resource Include="img\cimenterie.png" />
+    <Resource Include="img\decharge.png" />
+    <Resource Include="img\futuriste.png" />
     <Resource Include="img\magasinImage.jpg" />
     <Resource Include="img\magasinMenu.png" />
     <Resource Include="img\mairie.png" />
     <Resource Include="img\menuAccueil.png" />
     <Resource Include="img\menuMagasinProtection.png" />
+    <Resource Include="img\scierie.png" />
   </ItemGroup>
 
   <ItemGroup>
