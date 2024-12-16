@@ -1,14 +1,14 @@
-﻿<Window
+﻿<Window x:Name="jeu"
     x:Class="SAE_101.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE_101"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="Village Tycoon"
     Width="960"
     Height="540"
-    mc:Ignorable="d" KeyDown="Window_KeyDown" ResizeMode="NoResize">
+    mc:Ignorable="d" KeyDown="Window_KeyDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="/img/background.png" Stretch="Fill"/>
     </Window.Background>
@@ -328,10 +328,10 @@
             </StackPanel>
             <Label Content="Niveau 1" x:Name="labNiveauFuturiste" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
-
-        <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40"/>
-        <Button x:Name="but_defense" Content="Magasin de protection" Canvas.Left="542" Canvas.Top="10" Height="40" Width="135" HorizontalAlignment="Left" VerticalAlignment="Top" Click="but_defense_Click" Margin="512,11,0,0"/>
-
+        <StackPanel>
+            <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40"/>
+            <Button x:Name="but_defense" Content="Magasin de protection" Height="40" Width="135" Click="but_defense_Click" Margin="150,-986,0,0"/>
+        </StackPanel>
 
 
         <Canvas x:Name="canvasAnimation" >

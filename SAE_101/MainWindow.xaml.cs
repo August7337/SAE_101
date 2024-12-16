@@ -65,6 +65,9 @@ namespace SAE_101
         double volume = 50;
         bool premierPassage = true;
 
+        string achatDefense;
+        bool catastrophe = true;
+
 
 
         public MainWindow()
@@ -311,7 +314,7 @@ namespace SAE_101
 
         private void but_marche_Click(object sender, RoutedEventArgs e)
         {
-            magasin menu_magasin = new magasin();
+            Magasin menu_magasin = new Magasin();
             menu_magasin.ressources = ressources; 
             menu_magasin.argent = argent;
             menu_magasin.ShowDialog();
@@ -348,13 +351,25 @@ namespace SAE_101
 
         private void but_defense_Click(object sender, RoutedEventArgs e)
         {
-            defense menu_defense = new defense();
-            menu_defense.ShowDialog();
-
-            if(menu_defense.DialogResult == true)
+            if(catastrophe)
             {
-                Console.WriteLine("Exit");
+                Defense menu_defense = new Defense();
+                menu_defense.argent = argent;
+                menu_defense.AfficheArgent();
+                menu_defense.ShowDialog();
+
+                if (menu_defense.DialogResult == true)
+                {
+                    achatDefense = menu_defense.achat;
+                    Console.WriteLine("Exit");
+                    Console.WriteLine(achatDefense);
+                }
             }
+            else
+            {
+                MessageBox.Show("Le magasin est fermé, revenez plus tard","Aucun évènement",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+           
         }
 
         private void btn_Click_Classement(object sender, RoutedEventArgs e)

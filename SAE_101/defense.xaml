@@ -1,12 +1,25 @@
-﻿<Window x:Class="SAE_101.defense"
+﻿<Window x:Name="defense" x:Class="SAE_101.Defense"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_101"
         mc:Ignorable="d"
-        Title="defense" Height="400" Width="400">
+        Title="Magasin de protection" Height="400" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/img/menuMagasinProtection.png"/>
+    </Window.Background>
     <Grid>
-        
+        <Label x:Name="lab_accueil" Content="Magasin de protection" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Background="#84464646" Foreground="White"/>
+        <Button x:Name="but_antiTornade" Content="Anti-Tornade" HorizontalAlignment="Left" Margin="50,85,0,0" VerticalAlignment="Top" Height="50" Width="80" Click="but_antiTornade_Click"/>
+        <Button x:Name="but_antidote" Content="Antidote" HorizontalAlignment="Left" Margin="250,85,0,0" VerticalAlignment="Top" Width="80" Height="50" Click="but_antidote_Click"/>
+        <Button x:Name="but_eau" Content="Sceau d'eau" HorizontalAlignment="Left" Margin="50,230,0,0" VerticalAlignment="Top" Height="50" Width="80" Click="but_eau_Click"/>
+        <Button x:Name="but_paratonnere" Content="Paratonnere" HorizontalAlignment="Left" Margin="250,230,0,0" VerticalAlignment="Top" Width="80" Height="50" Click="but_paratonnere_Click"/>
+        <Label x:Name="lab_argent" Content="" HorizontalAlignment="Center" Margin="0,325,0,0" VerticalAlignment="Top" Background="#84464646" Foreground="White"/>
+        <Label x:Name="lab_prix_tornade" Content="" HorizontalAlignment="Left" Margin="55,140,0,0" VerticalAlignment="Top" Foreground="White" Background="#84464646" RenderTransformOrigin="-0.5,0.456"/>
+        <Label x:Name="lab_prix_antidote" Content="" HorizontalAlignment="Left" Margin="255,140,0,0" VerticalAlignment="Top" Background="#84464646" Foreground="White" RenderTransformOrigin="-1.92,0.703"/>
+        <Label x:Name="lab_prix_eau" Content="" HorizontalAlignment="Left" Margin="55,285,0,0" VerticalAlignment="Top" Background="#84464646" Foreground="White"/>
+        <Label x:Name="lab_prix_paratonnerre" Content="" HorizontalAlignment="Left" Margin="255,285,0,0" VerticalAlignment="Top" Background="#84464646" Foreground="White"/>
+
     </Grid>
 </Window>

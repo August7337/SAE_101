@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 namespace SAE_101
 {
     /// <summary>
-    /// Logique d'interaction pour magasin.xaml
+    /// Logique d'interaction pour Magasin.xaml
     /// </summary>
 
-    public partial class magasin : Window
+    public partial class Magasin : Window
     {
         static readonly double PRIX_PIERRE = 0.5;
         static readonly double PRIX_BOIS = 1;
@@ -33,17 +33,16 @@ namespace SAE_101
         double prixTotal = 0;
         bool verifSaisie;
 
-        public magasin()
+        public Magasin()
         {
             InitializeComponent();
             box_qte.Text = quantite.ToString();
             quantite = 1;
-
-
         }
 
         private void but_vendre_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine(argent);
             if (liste_materiaux.SelectedItem == null) // condition vérifiant si l'utilisateur à bien choisi une resssource
             {
                 MessageBox.Show(this,"Erreur, vous n'avez sélectionné aucune ressource","Erreur",MessageBoxButton.OK, MessageBoxImage.Error);
