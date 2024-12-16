@@ -85,7 +85,7 @@
             Text=""
             TextAlignment="Center"
             TextWrapping="Wrap" />
-        <Button x:Name="but_max_vente" Content="Max" HorizontalAlignment="Left" Margin="316,181,0,0" VerticalAlignment="Top" Width="40" Height="30" Background="#FF2500C3" Foreground="Black" Click="but_max_vente_Click"/>
+        <Button x:Name="but_max_vente" Content="Max" HorizontalAlignment="Left" Margin="316,181,0,0" VerticalAlignment="Top" Width="40" Height="30" Background="#FF2500C3" Foreground="White" Click="but_max_vente_Click"/>
 
     </Grid>
 </Window>
