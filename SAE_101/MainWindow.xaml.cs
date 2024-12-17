@@ -28,6 +28,7 @@ namespace SAE_101
     {
         static readonly double TORNADE_ARGENT = 0.05;
         static readonly double TORNADE_RESSOURCES = 0.10;
+        static readonly int MALADIE_ARGENT = 50;
         static readonly int PAS_MOUVEMENT = 3;
 
         double argent = 0;
@@ -69,13 +70,17 @@ namespace SAE_101
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
 
-        int conteur = 0;
+        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0;
         private static MediaPlayer musique;
         double volume = 50;
         bool premierPassage = true;
 
         string achatDefense;
         bool catastrophe = false;
+        string objetRequis = ""; // permet de vérifier si l'objet acheté pour contre une catastrophe est le bon 
+        Random rdn = new Random();
+        int usineTouche, niveauReelUsine; // niveauReelUsine va stocker le niveau de l'usine choisi par le random 
+        double prixTornade = 0, ressourcesEnMoins = 0;
 
         bool droite;
         bool gauche;
@@ -128,11 +133,13 @@ namespace SAE_101
             minuteur.Interval = TimeSpan.FromMilliseconds(16);
             minuteur.Tick += minuteurTick;
             minuteur.Start();
+            minuteurEvent = new DispatcherTimer();
+
         }
 
         private void minuteurTick(object? sender, EventArgs e)
         {
-            conteur++;
+            compteur++;
 
             if (droite)
             {
@@ -156,7 +163,7 @@ namespace SAE_101
                 Canvas.SetLeft(stackMaisonPierre, Canvas.GetLeft(stackMaisonPierre) + PAS_MOUVEMENT);
             }
 
-            if (conteur >= 20)
+            if (compteur >= 20)
             {
                 if (niveauMairie >= 10)
                 {
@@ -207,7 +214,67 @@ namespace SAE_101
                     AfficherTexte(relativePosition, "+" + futurParSecond);
                 }
 
-                conteur = 0;
+                compteur = 0;
+                
+                if (catastrophe && objetRequis == "antiTornade")
+                {
+                    compteurTonnerre++;
+                    Console.WriteLine(compteurTonnerre);
+
+                    if (compteurTonnerre >= 20)
+                    {
+                        prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
+                        if (prixTornade < 1)
+                        {
+                            prixTornade = 1;
+                        }
+                        Console.WriteLine(prixTornade);
+                        if (argent > 0)
+                        {
+                            argent -= prixTornade;
+                            for (int i = 0; i <= 4; i++)
+                            {
+                                ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
+                                if (ressourcesEnMoins < 1)
+                                {
+                                    ressourcesEnMoins = 1;
+                                }
+                                Console.WriteLine(ressourcesEnMoins);
+                                if (ressources[i] > 0)
+                                {
+                                    ressources[i] -= (int)ressourcesEnMoins;
+                                }
+
+                            }
+                            AfficheArgent();
+                            for (int j = 0; j <= 4; j++)
+                            {
+                                AfficheRessource(j);
+                            }
+                        }
+                        compteurTonnerre = 0;
+                    }
+                   
+
+                }
+                else if (catastrophe && objetRequis == "antidote")
+                {
+                    compteurMaladie++;
+                    Console.WriteLine(compteurMaladie);
+
+                    if (compteurMaladie >= 2)
+                    {
+                        if (argent > MALADIE_ARGENT)
+                        {
+                            argent -= MALADIE_ARGENT;
+                            AfficheArgent();
+                        }
+                        compteurMaladie = 0;
+                    }
+                    
+                   
+                }
+
             }
         }
 
@@ -394,7 +461,7 @@ namespace SAE_101
                 {
                     achatDefense = menu_defense.achat;
                     argent = menu_defense.argent;
-                    ArretTornade();
+                    ArretCatastrophe();
                     AfficheArgent();
                 }
             }
@@ -420,6 +487,25 @@ namespace SAE_101
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
 
+            if (e.Key == Key.T)
+                Tornade();
+
+            if (e.Key == Key.A)
+            {
+                Antidote();
+            }
+
+            if (e.Key == Key.E)
+            {
+                Feu();
+            }
+            if (e.Key == Key.F)
+            {
+                Foudre();
+            }
+            
+
+
             if (e.Key == Key.Right)
                 droite = true;
 
@@ -437,11 +523,6 @@ namespace SAE_101
         }
             //essai IA
 
-            if (e.Key == Key.T)
-            {
-                Tornade();
-            }
-        }
 
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
         {
@@ -638,58 +719,129 @@ namespace SAE_101
             }
         }
 
-        }
 
         private void Tornade()
         {
+            Console.WriteLine("tornade");
+            objetRequis = "antiTornade";
             catastrophe = true;
-            minuteurEvent = new DispatcherTimer();
-            minuteurEvent.Interval = TimeSpan.FromSeconds(10);
-            minuteurEvent.Start();
-            minuteurEvent.Tick += minuteurTornadeTick;
 
         }
 
-        private void minuteurTornadeTick(object? sender, EventArgs e)
+        private void Antidote()
         {
-            double prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
-            if (prixTornade < 1)
-            {
-                prixTornade = 1;
-            }
-            Console.WriteLine(prixTornade);
-            if (argent > 0)
-            {
-                argent -= prixTornade;
-                for (int i = 0; i <= 4; i++)
-                {
-                    double ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
-                    if(ressourcesEnMoins < 1)
-                    {
-                        ressourcesEnMoins = 1;
-                    }
-                    Console.WriteLine(ressourcesEnMoins);
-                    if (ressources[i] > 0)
-                    {
-                        ressources[i] -= (int)ressourcesEnMoins;
-                    }
-                         
-                }
-                AfficheArgent();
-                for (int j = 0; j <= 4; j++)
-                {
-                    AfficheRessource(j);
-                }
-            }
-
-
+            Console.WriteLine("Maladie");
+            objetRequis = "antidote";
+            catastrophe = true;
         }
-        
-        private void ArretTornade()
+
+
+        private void Foudre()
         {
-            catastrophe = false;
-            minuteurEvent.Stop();
-            Console.WriteLine("Passage");
+            objetRequis = "paratonnerre";
+            catastrophe = true;
+            usineTouche = rdn.Next(0, 5);
+            switch (usineTouche) // on désactive le bouton corespondant à l'indice (selon indice des ressources)
+            {
+                case 0:
+                    carriere.IsEnabled = false;// on désactive la carrière
+                    buttonAchatCarriere.IsEnabled = false;
+                    buttonAchatCarriereMax.IsEnabled = false;
+                    niveauReelUsine = niveauCarriere;
+                    niveauCarriere = 0; // mettre le niveau à 0 désactive l'augmmentation automatique qui ne se déclenche qu'au niveau 10
+                    break;
+                case 1:
+                    scierie.IsEnabled = false;
+                    buttonAchatScierie.IsEnabled = false;
+                    buttonAchatScierieMax.IsEnabled = false;    
+                    niveauReelUsine = niveauScierie;
+                    niveauScierie = 0;
+                    break;
+                case 2:
+                    decharge.IsEnabled = false;
+                    buttonAchatDecharge.IsEnabled = false;
+                    buttonAchatDechargeMax.IsEnabled = false;
+                    niveauReelUsine = niveauDecharge;
+                    niveauDecharge = 0;
+                    break;
+                case 3:
+                    cimenterie.IsEnabled= false;
+                    buttonAchatCimenterie.IsEnabled = false;
+                    buttonAchatCimenterieMax.IsEnabled=false;
+                    niveauReelUsine = niveauCimenterie;
+                    niveauCimenterie = 0;
+                    break;
+                case 4:
+                    futuriste.IsEnabled = false;
+                    buttonAchatFuturiste.IsEnabled=false;
+                    buttonAchatFuturisteMax.IsEnabled=false;
+                    niveauReelUsine = niveauFuturiste;
+                    niveauFuturiste = 0;
+                    break;
+                default: break;
+            }
+
+            
+        }
+
+        private void Feu()
+        {
+            objetRequis = "sceaueau";
+            
+        }
+
+
+        private void ArretCatastrophe()
+        {
+            if (achatDefense == objetRequis)
+            {
+                MessageBox.Show("La catastrophe s'est arrêté ! ", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+                catastrophe = false;
+                Console.WriteLine("Passage");
+                if (objetRequis == "paratonnerre")
+                {
+                    switch (usineTouche)
+                    {
+                        case 0:
+                            carriere.IsEnabled = true; // on active la carrière
+                            buttonAchatCarriere.IsEnabled = true;
+                            buttonAchatCarriereMax.IsEnabled = true;
+                            niveauCarriere = niveauReelUsine;
+
+                            break;
+                        case 1:
+                            scierie.IsEnabled = true;
+                            buttonAchatScierie.IsEnabled = true;
+                            buttonAchatScierieMax.IsEnabled = true; 
+                            niveauScierie = niveauReelUsine;
+                            break;
+                        case 2:
+                            decharge.IsEnabled = true;
+                            buttonAchatDecharge.IsEnabled = true;
+                            buttonAchatDechargeMax.IsEnabled = true;    
+                            niveauDecharge = niveauReelUsine;
+                            break;
+                        case 3:
+                            cimenterie.IsEnabled = false;
+                            buttonAchatCimenterie.IsEnabled = true;
+                            buttonAchatCimenterieMax.IsEnabled = true;
+                            niveauCimenterie = niveauReelUsine;
+                            break;
+                        case 4:
+                            futuriste.IsEnabled = true;
+                            buttonAchatFuturiste.IsEnabled= true;
+                            buttonAchatFuturisteMax.IsEnabled = true;
+                            niveauFuturiste = niveauReelUsine;
+                            break;
+                        default: break;
+                    }
+                }
+            }
+            
+            else
+            {
+                MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours","Achat réussi",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
         }
 
     }

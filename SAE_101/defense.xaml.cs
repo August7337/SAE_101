@@ -48,7 +48,6 @@ namespace SAE_101
         {
             if (argent - prixObjet >= 0)
             {
-                MessageBox.Show("La catastrophe s'est arrêté ! ", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
                 argent = argent - prixObjet;
                 return true;
             }
