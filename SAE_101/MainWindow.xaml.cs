@@ -29,7 +29,6 @@ namespace SAE_101
         static readonly double TORNADE_ARGENT = 0.05;
         static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int MALADIE_ARGENT = 50;
-        static readonly int PAS_MOUVEMENT = 3;
         static readonly int PAS_MOUVEMENT = 20;
 
         double argent = 0;
@@ -118,8 +117,6 @@ namespace SAE_101
             musique.Position = TimeSpan.Zero;
             musique.Play();
         }
-
-
 
         public static void VolumeMusique(double volume)
         {
@@ -288,10 +285,7 @@ namespace SAE_101
                         }
                         compteurMaladie = 0;
                     }
-                    
-                   
                 }
-
             }
         }
 
@@ -483,10 +477,7 @@ namespace SAE_101
                 }
             }
             else
-            {
                 MessageBox.Show("Le magasin est fermé, revenez plus tard", "Aucun évènement", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-
         }
 
         private void btn_Click_Classement(object sender, RoutedEventArgs e)
@@ -503,25 +494,17 @@ namespace SAE_101
                 argent += 100000;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
-
             if (e.Key == Key.T)
                 Tornade();
 
             if (e.Key == Key.A)
-            {
                 Antidote();
-            }
 
             if (e.Key == Key.E)
-            {
                 Feu();
-            }
-            if (e.Key == Key.F)
-            {
-                Foudre();
-            }
-            
 
+            if (e.Key == Key.F)
+                Foudre();
 
             if (e.Key == Key.Right)
                 droite = true;
@@ -537,8 +520,7 @@ namespace SAE_101
 
             if (e.Key == Key.Left)
                 gauche = false;
-        
-            //essai IA
+        }
 
 
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
@@ -751,7 +733,6 @@ namespace SAE_101
             catastrophe = true;
         }
 
-
         private void Foudre()
         {
             objetRequis = "paratonnerre";
@@ -796,8 +777,6 @@ namespace SAE_101
                     break;
                 default: break;
             }
-
-            
         }
 
         private void Feu()
@@ -824,8 +803,7 @@ namespace SAE_101
                     if (ressources[i] > 0)
                     {
                         ressources[i] -= (int)ressourcesEnMoins;
-                    }
-                         
+                    } 
                 }
                 AfficheArgent();
                 for (int j = 0; j <= 4; j++)
@@ -834,7 +812,6 @@ namespace SAE_101
                 }
             }
         }
-
 
         private void ArretCatastrophe()
         {
@@ -857,13 +834,13 @@ namespace SAE_101
                         case 1:
                             scierie.IsEnabled = true;
                             buttonAchatScierie.IsEnabled = true;
-                            buttonAchatScierieMax.IsEnabled = true; 
+                            buttonAchatScierieMax.IsEnabled = true;
                             niveauScierie = niveauReelUsine;
                             break;
                         case 2:
                             decharge.IsEnabled = true;
                             buttonAchatDecharge.IsEnabled = true;
-                            buttonAchatDechargeMax.IsEnabled = true;    
+                            buttonAchatDechargeMax.IsEnabled = true;
                             niveauDecharge = niveauReelUsine;
                             break;
                         case 3:
@@ -874,7 +851,7 @@ namespace SAE_101
                             break;
                         case 4:
                             futuriste.IsEnabled = true;
-                            buttonAchatFuturiste.IsEnabled= true;
+                            buttonAchatFuturiste.IsEnabled = true;
                             buttonAchatFuturisteMax.IsEnabled = true;
                             niveauFuturiste = niveauReelUsine;
                             break;
@@ -882,11 +859,11 @@ namespace SAE_101
                     }
                 }
             }
-            
             else
             {
-                MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours","Achat réussi",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
 
         private void ArretTornade()
         {
