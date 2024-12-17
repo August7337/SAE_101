@@ -18,6 +18,9 @@
     <None Remove="img\magasinImage.jpg" />
     <None Remove="img\magasinMenu.png" />
     <None Remove="img\mairie.png" />
+    <None Remove="img\MaisonBois.png" />
+    <None Remove="img\MaisonCiment.png" />
+    <None Remove="img\MaisonMetal.png" />
     <None Remove="img\MaisonPierre.png" />
     <None Remove="img\menuAccueil.png" />
     <None Remove="img\menuMagasinProtection.png" />
@@ -38,6 +41,9 @@
     <Resource Include="img\magasinImage.jpg" />
     <Resource Include="img\magasinMenu.png" />
     <Resource Include="img\mairie.png" />
+    <Resource Include="img\MaisonBois.png" />
+    <Resource Include="img\MaisonCiment.png" />
+    <Resource Include="img\MaisonMetal.png" />
     <Resource Include="img\MaisonPierre.png" />
     <Resource Include="img\menuAccueil.png" />
     <Resource Include="img\menuMagasinProtection.png" />

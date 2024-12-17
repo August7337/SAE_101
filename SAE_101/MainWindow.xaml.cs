@@ -30,6 +30,7 @@ namespace SAE_101
         static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int MALADIE_ARGENT = 50;
         static readonly int PAS_MOUVEMENT = 3;
+        static readonly int PAS_MOUVEMENT = 20;
 
         double argent = 0;
         int niveauMairie = 1;
@@ -66,6 +67,15 @@ namespace SAE_101
 
         int niveauMaisonPierre = 0;
         int prixMaisonPierre = 50;
+
+        int niveauMaisonBois = 0;
+        int prixMaisonBois = 50;
+
+        int niveauMaisonMetal = 0;
+        int prixMaisonMetal = 50;
+
+        int niveauMaisonCiment = 0;
+        int prixMaisonCiment = 50;
 
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
@@ -150,6 +160,9 @@ namespace SAE_101
                 Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) - PAS_MOUVEMENT);
                 Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) - PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonPierre, Canvas.GetLeft(stackMaisonPierre) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonBois, Canvas.GetLeft(stackMaisonBois) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonMetal, Canvas.GetLeft(stackMaisonMetal) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonCiment, Canvas.GetLeft(stackMaisonCiment) - PAS_MOUVEMENT);
             }
 
             if (gauche)
@@ -161,17 +174,21 @@ namespace SAE_101
                 Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) + PAS_MOUVEMENT);
                 Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) + PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonPierre, Canvas.GetLeft(stackMaisonPierre) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonBois, Canvas.GetLeft(stackMaisonBois) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonMetal, Canvas.GetLeft(stackMaisonMetal) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonCiment, Canvas.GetLeft(stackMaisonCiment) + PAS_MOUVEMENT);
             }
 
             if (compteur >= 20)
             {
                 if (niveauMairie >= 10)
                 {
-                    argent += argentParSecond * (1 + (double)niveauMaisonPierre/10);
+                    double calcule = argentParSecond * (1 + (double)niveauMaisonPierre / 10) * (1 + (double)niveauMaisonBois / 10) * (1 + (double)niveauMaisonMetal / 10) * (1 + (double)niveauMaisonCiment / 10);
+                    argent += calcule;
                     lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
 
                     Point relativePosition = mairie.TransformToAncestor(this).Transform(new Point(0, 0));
-                    AfficherTexte(relativePosition, "+" + argentParSecond * (1 + (double)niveauMaisonPierre / 10) + " €");
+                    AfficherTexte(relativePosition, "+" + Math.Round(calcule, 2).ToString("C", CultureInfo.CurrentCulture));
                 }
 
                 if (niveauCarriere >= 10)
@@ -520,7 +537,7 @@ namespace SAE_101
 
             if (e.Key == Key.Left)
                 gauche = false;
-        }
+        
             //essai IA
 
 
@@ -705,7 +722,7 @@ namespace SAE_101
 
         private void button_Click_Achat_Maison_Pierre_Max(object sender, RoutedEventArgs e)
         {
-            if (argent >= prixFuturiste)
+            if (ressources[0] >= prixMaisonPierre)
             {
                 int achatsMax = (int)Math.Floor(Math.Log(1 - (ressources[0] * (1 - 1.25)) / prixMaisonPierre) / Math.Log(1.25));
                 int totalCost = (int)(prixMaisonPierre * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
@@ -718,7 +735,6 @@ namespace SAE_101
                 labNiveauMaisonPierre.Content = "Niveau " + niveauMaisonPierre.ToString();
             }
         }
-
 
         private void Tornade()
         {
@@ -788,6 +804,35 @@ namespace SAE_101
         {
             objetRequis = "sceaueau";
             
+            double prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
+            if (prixTornade < 1)
+            {
+                prixTornade = 1;
+            }
+            Console.WriteLine(prixTornade);
+            if (argent > 0)
+            {
+                argent -= prixTornade;
+                for (int i = 0; i <= 4; i++)
+                {
+                    double ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
+                    if(ressourcesEnMoins < 1)
+                    {
+                        ressourcesEnMoins = 1;
+                    }
+                    Console.WriteLine(ressourcesEnMoins);
+                    if (ressources[i] > 0)
+                    {
+                        ressources[i] -= (int)ressourcesEnMoins;
+                    }
+                         
+                }
+                AfficheArgent();
+                for (int j = 0; j <= 4; j++)
+                {
+                    AfficheRessource(j);
+                }
+            }
         }
 
 
@@ -842,7 +887,99 @@ namespace SAE_101
             {
                 MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours","Achat réussi",MessageBoxButton.OK,MessageBoxImage.Information);
             }
+
+        private void ArretTornade()
+        {
+            catastrophe = false;
+            minuteurEvent.Stop();
+            Console.WriteLine("Passage");
         }
 
+        private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
+        {
+            if (ressources[1] >= prixMaisonBois)
+            {
+                ressources[1] -= prixMaisonBois;
+                niveauMaisonBois++;
+                prixMaisonBois = (int)(prixMaisonBois * 1.25);
+                lab_bois.Content = ressources[1].ToString();
+                buttonAchatMaisonBois.Content = "Ammelioration " + prixMaisonBois.ToString();
+                labNiveauMaisonPierre.Content = "Niveau " + niveauMaisonBois.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Bois_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixMaisonBois)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (ressources[1] * (1 - 1.25)) / prixMaisonBois) / Math.Log(1.25));
+                int totalCost = (int)(prixMaisonBois * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
+
+                niveauMaisonBois += achatsMax;
+                ressources[1] -= totalCost;
+                prixMaisonBois = (int)(prixMaisonBois * Math.Pow(1.25, achatsMax));
+                lab_bois.Content = ressources[1].ToString();
+                buttonAchatMaisonBois.Content = "Ammelioration " + prixMaisonBois.ToString();
+                labNiveauMaisonBois.Content = "Niveau " + niveauMaisonBois.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Metal(object sender, RoutedEventArgs e)
+        {
+            if (ressources[2] >= prixMaisonMetal)
+            {
+                ressources[2] -= prixMaisonMetal;
+                niveauMaisonMetal++;
+                prixMaisonMetal = (int)(prixMaisonMetal * 1.25);
+                lab_metal.Content = ressources[2].ToString();
+                buttonAchatMaisonMetal.Content = "Ammelioration " + prixMaisonMetal.ToString();
+                labNiveauMaisonMetal.Content = "Niveau " + niveauMaisonMetal.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Metal_Max(object sender, RoutedEventArgs e)
+        {
+            if (ressources[2] >= prixMaisonMetal)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (ressources[2] * (1 - 1.25)) / prixMaisonMetal) / Math.Log(1.25));
+                int totalCost = (int)(prixMaisonMetal * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
+
+                niveauMaisonMetal += achatsMax;
+                ressources[2] -= totalCost;
+                prixMaisonMetal = (int)(prixMaisonMetal * Math.Pow(1.25, achatsMax));
+                lab_metal.Content = ressources[2].ToString();
+                buttonAchatMaisonMetal.Content = "Ammelioration " + prixMaisonMetal.ToString();
+                labNiveauMaisonMetal.Content = "Niveau " + niveauMaisonMetal.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Ciment(object sender, RoutedEventArgs e)
+        {
+            if (ressources[3] >= prixMaisonCiment)
+            {
+                ressources[3] -= prixMaisonCiment;
+                niveauMaisonCiment++;
+                prixMaisonCiment = (int)(prixMaisonCiment * 1.25);
+                lab_ciment.Content = ressources[3].ToString();
+                buttonAchatMaisonCiment.Content = "Ammelioration " + prixMaisonCiment.ToString();
+                labNiveauMaisonCiment.Content = "Niveau " + niveauMaisonCiment.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Ciment_Max(object sender, RoutedEventArgs e)
+        {
+            if (ressources[3] >= prixMaisonCiment)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (ressources[3] * (1 - 1.25)) / prixMaisonCiment) / Math.Log(1.25));
+                int totalCost = (int)(prixMaisonCiment * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
+
+                niveauMaisonCiment += achatsMax;
+                ressources[3] -= totalCost;
+                prixMaisonCiment = (int)(prixMaisonCiment * Math.Pow(1.25, achatsMax));
+                lab_ciment.Content = ressources[3].ToString();
+                buttonAchatMaisonCiment.Content = "Ammelioration " + prixMaisonCiment.ToString();
+                labNiveauMaisonCiment.Content = "Niveau " + niveauMaisonCiment.ToString();
+            }
+        }
     }
 }

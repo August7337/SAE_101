@@ -103,9 +103,9 @@
 
             <Button
                 x:Name="btnClassement"
-                Background="#FFE8E8E8"
+                Background="#FFA36C00"
                 Click="btn_Click_Classement"
-                Content="Classement" />
+                Content="Classement" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
 
 
         </StackPanel>
@@ -142,17 +142,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                     </Button.Style>
                 </Button>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" >
                     <Button
     x:Name="buttonAchatMairie"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Mairie"
-    Content="Ammelioration 10 €" Cursor="Hand" Focusable="False" />
+    Content="Ammelioration 10 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
     x:Name="buttonAchatMairieMax"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Mairie_Max"
-    Content="Max" Cursor="Hand" Focusable="False" />
+    Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauMairie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -179,17 +179,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                     </Button.Style>
                 </Button>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                     <Button
             x:Name="buttonAchatDecharge"
-            Background="#FFE8E8E8"
+            Background="#FFA36C00"
             Click="button_Click_Achat_Decharge"
-            Content="Ammelioration 20 €" Cursor="Hand" Focusable="False" />
+            Content="Ammelioration 20 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
             x:Name="buttonAchatDechargeMax"
-            Background="#FFE8E8E8"
+            Background="#FFA36C00"
             Click="button_Click_Achat_Decharge_Max"
-            Content="Max" Cursor="Hand" Focusable="False" />
+            Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauDecharge" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -215,17 +215,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                         </Style>
                     </Button.Style>
                 </Button>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" >
                     <Button
             x:Name="buttonAchatCarriere"
-            Background="#FFE8E8E8"
+            Background="#FFA36C00"
             Click="button_Click_Achat_Carriere"
-            Content="Ammelioration 5 €" Cursor="Hand" Focusable="False" />
+            Content="Ammelioration 5 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
             x:Name="buttonAchatCarriereMax"
-            Background="#FFE8E8E8"
+            Background="#FFA36C00"
             Click="button_Click_Achat_Carriere_Max"
-            Content="Max" Cursor="Hand" Focusable="False" />
+            Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauCarriere" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -251,17 +251,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                         </Style>
                     </Button.Style>
                 </Button>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                     <Button
     x:Name="buttonAchatScierie"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Scierie"
-    Content="Ammelioration 15 €" Cursor="Hand" Focusable="False" />
+    Content="Ammelioration 15 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
     x:Name="buttonAchatScierieMax"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Scierie_Max"
-    Content="Max" Cursor="Hand" Focusable="False" />
+    Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauScierie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -288,17 +288,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                     </Button.Style>
                 </Button>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                     <Button
     x:Name="buttonAchatCimenterie"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Cimenterie"
-    Content="Ammelioration 30 €" Cursor="Hand" Focusable="False" />
+    Content="Ammelioration 30 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400"/>
                     <Button
     x:Name="buttonAchatCimenterieMax"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Cimenterie_Max"
-    Content="Max" Cursor="Hand" Focusable="False" />
+    Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400"/>
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauCimenterie" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -325,17 +325,17 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                     </Button.Style>
                 </Button>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                     <Button
     x:Name="buttonAchatFuturiste"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Futuriste"
-    Content="Ammelioration 50 €" Cursor="Hand" Focusable="False" />
+    Content="Ammelioration 50 €" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
     x:Name="buttonAchatFuturisteMax"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Futuriste_Max"
-    Content="Max" Cursor="Hand" Focusable="False" />
+    Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
                 <Label Content="Niveau 1" x:Name="labNiveauFuturiste" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
@@ -343,19 +343,73 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
             <StackPanel x:Name="stackMaisonPierre" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="260" Canvas.Left="1000" >
                 <Image Source="/img/MaisonPierre.png" Width="80" />
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
                     <Button
     x:Name="buttonAchatMaisonPierre"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Maison_Pierre"
-    Content="Ammelioration 50 €" Cursor="Hand" Focusable="False" />
+    Content="Ammelioration 50" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                     <Button
     x:Name="buttonAchatMaisonPierreMax"
-    Background="#FFE8E8E8"
+    Background="#FFA36C00"
     Click="button_Click_Achat_Maison_Pierre_Max"
-    Content="Max" Cursor="Hand" Focusable="False" />
+    Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
                 </StackPanel>
-                <Label Content="Niveau 1" x:Name="labNiveauMaisonPierre" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Content="Niveau 0" x:Name="labNiveauMaisonPierre" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
+            <StackPanel x:Name="stackMaisonBois" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="260" Canvas.Left="1150" >
+                <Image Source="/img/MaisonBois.png" Width="80" />
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Button
+x:Name="buttonAchatMaisonBois"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Bois"
+Content="Ammelioration 50" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                    <Button
+x:Name="buttonAchatMaisonBoisMax"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Bois_Max"
+Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                </StackPanel>
+                <Label Content="Niveau 0" x:Name="labNiveauMaisonBois" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
+            <StackPanel x:Name="stackMaisonMetal" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="260" Canvas.Left="1300" >
+                <Image Source="/img/MaisonMetal.png" Width="80" />
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Button
+x:Name="buttonAchatMaisonMetal"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Metal"
+Content="Ammelioration 50" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                    <Button
+x:Name="buttonAchatMaisonMetalMax"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Metal_Max"
+Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                </StackPanel>
+                <Label Content="Niveau 0" x:Name="labNiveauMaisonMetal" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
+            <StackPanel x:Name="stackMaisonCiment" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="260" Canvas.Left="1450" >
+                <Image Source="/img/MaisonCiment.png" Width="80" />
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Button
+x:Name="buttonAchatMaisonCiment"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Ciment"
+Content="Ammelioration 50" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                    <Button
+x:Name="buttonAchatMaisonCimentMax"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Ciment_Max"
+Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                </StackPanel>
+                <Label Content="Niveau 0" x:Name="labNiveauMaisonCiment" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <Slider x:Name="barre_volume" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50" HorizontalAlignment="Left" Canvas.Left="15" Canvas.Top="472" VerticalAlignment="Top" Focusable="False">
@@ -370,6 +424,5 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
             </Slider>
             <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="47" Canvas.Top="442" VerticalAlignment="Center"/>
         </Canvas>
-
     </Grid>
 </Window>
