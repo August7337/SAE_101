@@ -48,7 +48,7 @@ namespace SAE_101
         {
             if (argent - prixObjet >= 0)
             {
-                MessageBox.Show("Achat réussi", "Produit acheté", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("La catastrophe s'est arrêté ! ", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
                 argent = argent - prixObjet;
                 return true;
             }
@@ -64,7 +64,7 @@ namespace SAE_101
             if (verifArgent(PRIX_ANTI_TORNADE))
             {
                 achat = "antiTornade";
-                this.DialogResult = true;
+                DialogResult = true;
             }
             
         }
