@@ -440,7 +440,7 @@ namespace SAE_101
 
             if (e.Key == Key.Left)
                 gauche = false;
-        }
+        
             //essai IA
 
             if (e.Key == Key.T)
@@ -644,8 +644,6 @@ namespace SAE_101
             }
         }
 
-        }
-
         private void Tornade()
         {
             catastrophe = true;
@@ -687,8 +685,6 @@ namespace SAE_101
                     AfficheRessource(j);
                 }
             }
-
-
         }
         
         private void ArretTornade()
@@ -698,7 +694,6 @@ namespace SAE_101
             Console.WriteLine("Passage");
         }
 
-        }
 
         private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
         {
