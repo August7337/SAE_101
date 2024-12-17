@@ -26,6 +26,8 @@ namespace SAE_101
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly double TORNADE_ARGENT = 0.05;
+        static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int PAS_MOUVEMENT = 3;
 
         double argent = 0;
@@ -34,7 +36,7 @@ namespace SAE_101
         int argentParSecond = 1;
         double prixMairie = 10;
 
-        int[] ressources = [0,0,0,0,0];
+        int[] ressources = [0, 0, 0, 0, 0];
 
         int niveauCarriere = 1;
         double prixCarriere = 5;
@@ -68,13 +70,15 @@ namespace SAE_101
         int prixMaisonBois = 50;
 
         DispatcherTimer minuteur;
+        DispatcherTimer minuteurEvent;
+
         int conteur = 0;
         private static MediaPlayer musique;
         double volume = 50;
         bool premierPassage = true;
 
         string achatDefense;
-        bool catastrophe = true;
+        bool catastrophe = false;
 
         bool droite;
         bool gauche;
@@ -103,11 +107,11 @@ namespace SAE_101
             musique.Play();
         }
 
-       
+
 
         public static void VolumeMusique(double volume)
         {
-            musique.Volume = volume/100;
+            musique.Volume = volume / 100;
         }
 
         private void barre_volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -172,8 +176,7 @@ namespace SAE_101
                 if (niveauCarriere >= 10)
                 {
                     ressources[0] += pierreParSeconde;
-                    lab_pierre.Content = ressources[0].ToString();
-
+                    AfficheRessource(0);
                     Point relativePosition = carriere.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + pierreParSeconde);
                 }
@@ -181,8 +184,7 @@ namespace SAE_101
                 if (niveauScierie >= 10)
                 {
                     ressources[1] += boisParSecond;
-                    lab_bois.Content = ressources[1].ToString();
-
+                    AfficheRessource(1);
                     Point relativePosition = scierie.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + boisParSecond);
                 }
@@ -190,8 +192,7 @@ namespace SAE_101
                 if (niveauDecharge >= 10)
                 {
                     ressources[2] += metalParSecond;
-                    lab_metal.Content = ressources[2].ToString();
-
+                    AfficheRessource(2);
                     Point relativePosition = decharge.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + metalParSecond);
                 }
@@ -199,8 +200,7 @@ namespace SAE_101
                 if (niveauCimenterie >= 10)
                 {
                     ressources[3] += cimentParSecond;
-                    lab_ciment.Content = ressources[3].ToString();
-
+                    AfficheRessource(3);
                     Point relativePosition = cimenterie.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + cimentParSecond);
                 }
@@ -208,8 +208,7 @@ namespace SAE_101
                 if (niveauFuturiste >= 10)
                 {
                     ressources[4] += futurParSecond;
-                    lab_futur.Content = ressources[4].ToString();
-
+                    AfficheRessource(4);
                     Point relativePosition = futuriste.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + futurParSecond);
                 }
@@ -241,7 +240,7 @@ namespace SAE_101
                 labNiveauMairie.Content = "Niveau " + niveauMairie.ToString();
             }
         }
-    
+
         private void button_Click_Achat_Mairie_Max(object sender, RoutedEventArgs e)
         {
             if (argent >= prixMairie)
@@ -263,8 +262,7 @@ namespace SAE_101
         private void button_Click_Carriere(object sender, RoutedEventArgs e)
         {
             ressources[0] += pierreParClick;
-            lab_pierre.Content = ressources[0].ToString();
-
+            AfficheRessource(0);
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + pierreParClick);
         }
@@ -337,55 +335,61 @@ namespace SAE_101
             translateTransform.BeginAnimation(TranslateTransform.YProperty, animationMontee);
         }
 
+        private void AfficheArgent()
+        {
+            lab_argent.Content = argent + " €";
+        }
+
+        private void AfficheRessource(int ressource)
+        {
+            switch (ressource)
+            {
+                case 0:
+                    lab_pierre.Content = ressources[0].ToString();
+                    break;
+                case 1:
+                    lab_bois.Content = ressources[1].ToString();
+                    break;
+                case 2:
+                    lab_metal.Content = ressources[2].ToString();
+                    break;
+                case 3:
+                    lab_ciment.Content = ressources[3].ToString();
+                    break;
+                case 4:
+                    lab_futur.Content = ressources[4].ToString();
+                    break;
+                default: break;
+            }
+        }
+
         private void button_Click_Vente_Pierre(object sender, RoutedEventArgs e)
         {
             double montantVente = ressources[0] * 0.1;
             argent += montantVente;
             ressources[0] = 0;
             lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
-            lab_pierre.Content = ressources[0].ToString();
+            AfficheRessource(0);
         }
 
         private void but_marche_Click(object sender, RoutedEventArgs e)
         {
             Marche menu_magasin = new Marche();
-            menu_magasin.ressources = ressources; 
+            menu_magasin.ressources = ressources;
             menu_magasin.argent = argent;
             menu_magasin.ShowDialog();
             if (menu_magasin.DialogResult == true)
             {
                 ressources = menu_magasin.ressources;
                 argent += menu_magasin.argent;
-                lab_argent.Content = argent + "€";
-            }
-
-            switch (menu_magasin.indice)
-            {
-                case 0:
-                    lab_pierre.Content = ressources[0];
-                    break;
-                case 1:
-                    lab_bois.Content = ressources[1];
-                    break;
-                case 2:
-                    lab_metal.Content = ressources[2];
-                    break;
-                case 3:
-                    lab_ciment.Content = ressources[3];
-                    break;
-                case 4:
-                    lab_futur.Content = ressources[4];
-                    break;
-                default:
-                    Console.WriteLine("Erreur");
-                    break;
-
+                AfficheArgent();
+                AfficheRessource(menu_magasin.indice);
             }
         }
 
         private void but_defense_Click(object sender, RoutedEventArgs e)
         {
-            if(catastrophe)
+            if (catastrophe)
             {
                 Defense menu_defense = new Defense();
                 menu_defense.argent = argent;
@@ -396,15 +400,15 @@ namespace SAE_101
                 {
                     achatDefense = menu_defense.achat;
                     argent = menu_defense.argent;
-                    lab_argent.Content = argent + " €";
-                    Console.WriteLine(achatDefense);
+                    ArretTornade();
+                    AfficheArgent();
                 }
             }
             else
             {
-                MessageBox.Show("Le magasin est fermé, revenez plus tard","Aucun évènement",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show("Le magasin est fermé, revenez plus tard", "Aucun évènement", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-           
+
         }
 
         private void btn_Click_Classement(object sender, RoutedEventArgs e)
@@ -437,12 +441,18 @@ namespace SAE_101
             if (e.Key == Key.Left)
                 gauche = false;
         }
+            //essai IA
+
+            if (e.Key == Key.T)
+            {
+                Tornade();
+            }
+        }
 
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
         {
             ressources[2] += metalParClick;
-            lab_metal.Content = ressources[2].ToString();
-
+            AfficheRessource(2);
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + metalParClick);
         }
@@ -483,8 +493,7 @@ namespace SAE_101
         private void button_Click_Scierie(object sender, RoutedEventArgs e)
         {
             ressources[1] += metalParClick;
-            lab_bois.Content = ressources[1].ToString();
-
+            AfficheRessource(1);
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + boisParClick);
         }
@@ -525,7 +534,7 @@ namespace SAE_101
         private void button_Click_Cimenterie(object sender, RoutedEventArgs e)
         {
             ressources[3] += cimentParClick;
-            lab_ciment.Content = ressources[3].ToString();
+            AfficheRessource(3);
 
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + cimentParClick);
@@ -567,7 +576,7 @@ namespace SAE_101
         private void button_Click_Futuriste(object sender, RoutedEventArgs e)
         {
             ressources[4] += futurParClick;
-            lab_futur.Content = ressources[4].ToString();
+            AfficheRessource(4);
 
             Point position = Mouse.GetPosition(canvasAnimation);
             AfficherTexte(position, "+" + futurParClick);
@@ -633,6 +642,62 @@ namespace SAE_101
                 buttonAchatMaisonPierre.Content = "Ammelioration " + prixMaisonPierre.ToString();
                 labNiveauMaisonPierre.Content = "Niveau " + niveauMaisonPierre.ToString();
             }
+        }
+
+        }
+
+        private void Tornade()
+        {
+            catastrophe = true;
+            minuteurEvent = new DispatcherTimer();
+            minuteurEvent.Interval = TimeSpan.FromSeconds(10);
+            minuteurEvent.Start();
+            minuteurEvent.Tick += minuteurTornadeTick;
+
+        }
+
+        private void minuteurTornadeTick(object? sender, EventArgs e)
+        {
+            double prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
+            if (prixTornade < 1)
+            {
+                prixTornade = 1;
+            }
+            Console.WriteLine(prixTornade);
+            if (argent > 0)
+            {
+                argent -= prixTornade;
+                for (int i = 0; i <= 4; i++)
+                {
+                    double ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
+                    if(ressourcesEnMoins < 1)
+                    {
+                        ressourcesEnMoins = 1;
+                    }
+                    Console.WriteLine(ressourcesEnMoins);
+                    if (ressources[i] > 0)
+                    {
+                        ressources[i] -= (int)ressourcesEnMoins;
+                    }
+                         
+                }
+                AfficheArgent();
+                for (int j = 0; j <= 4; j++)
+                {
+                    AfficheRessource(j);
+                }
+            }
+
+
+        }
+        
+        private void ArretTornade()
+        {
+            catastrophe = false;
+            minuteurEvent.Stop();
+            Console.WriteLine("Passage");
+        }
+
         }
 
         private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
