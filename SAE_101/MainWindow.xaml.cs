@@ -26,6 +26,8 @@ namespace SAE_101
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly int PAS_MOUVEMENT = 3;
+
         double argent = 0;
         int niveauMairie = 1;
         double argentParClick = 1;
@@ -68,7 +70,8 @@ namespace SAE_101
         string achatDefense;
         bool catastrophe = true;
 
-
+        bool droite;
+        bool gauche;
 
         public MainWindow()
         {
@@ -115,7 +118,7 @@ namespace SAE_101
         private void InitMinuteur()
         {
             minuteur = new DispatcherTimer();
-            minuteur.Interval = TimeSpan.FromMilliseconds(20);
+            minuteur.Interval = TimeSpan.FromMilliseconds(16);
             minuteur.Tick += minuteurTick;
             minuteur.Start();
         }
@@ -123,6 +126,26 @@ namespace SAE_101
         private void minuteurTick(object? sender, EventArgs e)
         {
             conteur++;
+
+            if (droite)
+            {
+                Canvas.SetLeft(stackCarriere, Canvas.GetLeft(stackCarriere) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackCimenterie, Canvas.GetLeft(stackCimenterie) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackDecharge, Canvas.GetLeft(stackDecharge) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackFuturiste, Canvas.GetLeft(stackFuturiste) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) - PAS_MOUVEMENT);
+            }
+
+            if (gauche)
+            {
+                Canvas.SetLeft(stackCarriere, Canvas.GetLeft(stackCarriere) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackCimenterie, Canvas.GetLeft(stackCimenterie) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackDecharge, Canvas.GetLeft(stackDecharge) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackFuturiste, Canvas.GetLeft(stackFuturiste) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) + PAS_MOUVEMENT);
+            }
 
             if (conteur >= 20)
             {
@@ -386,6 +409,21 @@ namespace SAE_101
                 argent += 100000;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
+
+            if (e.Key == Key.Right)
+                droite = true;
+
+            if (e.Key == Key.Left)
+                gauche = true;
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right)
+                droite = false;
+
+            if (e.Key == Key.Left)
+                gauche = false;
         }
 
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
@@ -555,7 +593,5 @@ namespace SAE_101
                 labNiveauFuturiste.Content = "Niveau " + niveauFuturiste.ToString();
             }
         }
-
-        
     }
 }
