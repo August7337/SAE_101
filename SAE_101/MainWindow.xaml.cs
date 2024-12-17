@@ -30,7 +30,6 @@ namespace SAE_101
         static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int MALADIE_ARGENT = 50;
         static readonly int PAS_MOUVEMENT = 3;
-        static readonly int PAS_MOUVEMENT = 20;
 
         double argent = 0;
         int niveauMairie = 1;
@@ -39,6 +38,7 @@ namespace SAE_101
         double prixMairie = 10;
 
         int[] ressources = [0, 0, 0, 0, 0];
+        int[] niveauMaison = [0, 0, 0, 0, 0];
 
         int niveauCarriere = 1;
         double prixCarriere = 5;
@@ -80,7 +80,7 @@ namespace SAE_101
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
 
-        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0;
+        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0, compteurFeu = 0;
         private static MediaPlayer musique;
         double volume = 50;
         bool premierPassage = true;
@@ -90,6 +90,7 @@ namespace SAE_101
         string objetRequis = ""; // permet de vérifier si l'objet acheté pour contre une catastrophe est le bon 
         Random rdn = new Random();
         int usineTouche, niveauReelUsine; // niveauReelUsine va stocker le niveau de l'usine choisi par le random 
+        int maisonTouche;
         double prixTornade = 0, ressourcesEnMoins = 0;
 
         bool droite;
@@ -290,6 +291,16 @@ namespace SAE_101
                     }
                     
                    
+                }
+                else if (catastrophe && objetRequis == "sceauEau")
+                {
+                    compteurFeu++;
+                    Console.WriteLine(compteurFeu);
+
+                    if (compteurFeu >= 20)
+                    {
+                       
+                    }
                 }
 
             }
@@ -537,8 +548,8 @@ namespace SAE_101
 
             if (e.Key == Key.Left)
                 gauche = false;
-        
-            //essai IA
+
+        }
 
 
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
@@ -802,39 +813,11 @@ namespace SAE_101
 
         private void Feu()
         {
-            objetRequis = "sceaueau";
-            
-            double prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
-            if (prixTornade < 1)
-            {
-                prixTornade = 1;
-            }
-            Console.WriteLine(prixTornade);
-            if (argent > 0)
-            {
-                argent -= prixTornade;
-                for (int i = 0; i <= 4; i++)
-                {
-                    double ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
-                    if(ressourcesEnMoins < 1)
-                    {
-                        ressourcesEnMoins = 1;
-                    }
-                    Console.WriteLine(ressourcesEnMoins);
-                    if (ressources[i] > 0)
-                    {
-                        ressources[i] -= (int)ressourcesEnMoins;
-                    }
-                         
-                }
-                AfficheArgent();
-                for (int j = 0; j <= 4; j++)
-                {
-                    AfficheRessource(j);
-                }
-            }
+            objetRequis = "sceauEau";
+            catastrophe = true;
+            maisonTouche = rdn.Next(0, 5);
         }
-
+            
 
         private void ArretCatastrophe()
         {
@@ -857,13 +840,13 @@ namespace SAE_101
                         case 1:
                             scierie.IsEnabled = true;
                             buttonAchatScierie.IsEnabled = true;
-                            buttonAchatScierieMax.IsEnabled = true; 
+                            buttonAchatScierieMax.IsEnabled = true;
                             niveauScierie = niveauReelUsine;
                             break;
                         case 2:
                             decharge.IsEnabled = true;
                             buttonAchatDecharge.IsEnabled = true;
-                            buttonAchatDechargeMax.IsEnabled = true;    
+                            buttonAchatDechargeMax.IsEnabled = true;
                             niveauDecharge = niveauReelUsine;
                             break;
                         case 3:
@@ -874,7 +857,7 @@ namespace SAE_101
                             break;
                         case 4:
                             futuriste.IsEnabled = true;
-                            buttonAchatFuturiste.IsEnabled= true;
+                            buttonAchatFuturiste.IsEnabled = true;
                             buttonAchatFuturisteMax.IsEnabled = true;
                             niveauFuturiste = niveauReelUsine;
                             break;
@@ -882,18 +865,19 @@ namespace SAE_101
                     }
                 }
             }
-            
+
             else
             {
-                MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours","Achat réussi",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
+        }
         private void ArretTornade()
         {
             catastrophe = false;
             minuteurEvent.Stop();
             Console.WriteLine("Passage");
         }
+
 
         private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
         {
