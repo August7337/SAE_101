@@ -412,6 +412,24 @@ Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush
                 <Label Content="Niveau 0" x:Name="labNiveauMaisonCiment" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
+            <StackPanel x:Name="stackMaisonFuture" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Top="260" Canvas.Left="1600" >
+                <Image Source="/img/MaisonFuture.png" Width="80" />
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    <Button
+x:Name="buttonAchatMaisonFuture"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Future"
+Content="Ammelioration 50" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                    <Button
+x:Name="buttonAchatMaisonFutureMax"
+Background="#FFA36C00"
+Click="button_Click_Achat_Maison_Future_Max"
+Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+                </StackPanel>
+                <Label Content="Niveau 0" x:Name="labNiveauMaisonFuture" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
             <Slider x:Name="barre_volume" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50" HorizontalAlignment="Left" Canvas.Left="15" Canvas.Top="472" VerticalAlignment="Top" Focusable="False">
                 <Slider.RenderTransform>
                     <TransformGroup>
