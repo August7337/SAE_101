@@ -18,6 +18,7 @@ using System.Text.Json;
 using System.Media;
 using System.Security.Cryptography;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SAE_101
 {
@@ -30,6 +31,8 @@ namespace SAE_101
         static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int MALADIE_ARGENT = 50;
         static readonly int PAS_MOUVEMENT = 20;
+        static readonly int UNE_MINUTE_EN_TICK = 500; //3750
+        static readonly int TROIS_MINUTES_EN_TICK = 1000; // 11250
 
         double argent = 0;
         int niveauMairie = 1;
@@ -74,15 +77,18 @@ namespace SAE_101
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
 
-        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0, compteurFeu = 0;
+        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0, compteurFeu = 0, compteurDeclencheFoudre = 0;
+        int compteurDeclencheMaladie = 0;
         private static MediaPlayer musique;
         double volume = 50;
         bool premierPassage = true;
 
+
+        int tpsDeclencheFoudre;
         string achatDefense;
         bool catastrophe = false;
         string objetRequis = ""; // permet de vérifier si l'objet acheté pour contre une catastrophe est le bon 
-        Random rdn = new Random();
+        public static Random rdn = new Random();
         int usineTouche, niveauReelUsine; // niveauReelUsine va stocker le niveau de l'usine choisi par le random 
         int maisonTouche;
         double prixTornade = 0, ressourcesEnMoins = 0;
@@ -98,6 +104,7 @@ namespace SAE_101
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
             InitMinuteur();
+            tpsDeclencheFoudre = DeclencheFoudre();
         }
 
         public static void InitMusique()
@@ -229,76 +236,87 @@ namespace SAE_101
             }
 
             if (catastrophe && objetRequis == "antiTornade")
-                {
-                    compteurTonnerre++;
-                    Console.WriteLine(compteurTonnerre);
+            {
+                compteurTonnerre++;
+                Console.WriteLine(compteurTonnerre);
 
-                    if (compteurTonnerre >= 500)
+                if (compteurTonnerre >= 500)
+                {
+                    prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
+                    if (prixTornade < 1)
                     {
-                        prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
-                        if (prixTornade < 1)
+                        prixTornade = 1;
+                    }
+                    Console.WriteLine(prixTornade);
+                    if (argent > 0)
+                    {
+                        argent -= prixTornade;
+                        for (int i = 0; i <= 4; i++)
                         {
-                            prixTornade = 1;
-                        }
-                        Console.WriteLine(prixTornade);
-                        if (argent > 0)
-                        {
-                            argent -= prixTornade;
-                            for (int i = 0; i <= 4; i++)
+                            ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
+                            if (ressourcesEnMoins < 1)
                             {
-                                ressourcesEnMoins = ressources[i] * TORNADE_RESSOURCES;
-                                if (ressourcesEnMoins < 1)
-                                {
-                                    ressourcesEnMoins = 1;
-                                }
-                                Console.WriteLine(ressourcesEnMoins);
-                                if (ressources[i] > 0)
-                                {
-                                    ressources[i] -= (int)ressourcesEnMoins;
-                                }
-
+                                ressourcesEnMoins = 1;
                             }
-                            AfficheArgent();
-                            for (int j = 0; j <= 4; j++)
+                            Console.WriteLine(ressourcesEnMoins);
+                            if (ressources[i] > 0)
                             {
-                                AfficheRessource(j);
+                                ressources[i] -= (int)ressourcesEnMoins;
                             }
+
                         }
-                        compteurTonnerre = 0;
-                    }
-                   
-
-                }
-                else if (catastrophe && objetRequis == "antidote")
-                {
-                    compteurMaladie++;
-                    Console.WriteLine(compteurMaladie);
-
-                    if (compteurMaladie >= 100)
-                    {
-                        if (argent > MALADIE_ARGENT)
+                        AfficheArgent();
+                        for (int j = 0; j <= 4; j++)
                         {
-                            argent -= MALADIE_ARGENT;
-                            AfficheArgent();
+                            AfficheRessource(j);
                         }
-                        compteurMaladie = 0;
                     }
+                    compteurTonnerre = 0;
                 }
-                else if (catastrophe && objetRequis == "sceauEau")
-                {
-                    compteurFeu++;
-                    Console.WriteLine(compteurFeu);
 
-                    if (compteurFeu >= 350)
+
+            }
+            else if (catastrophe && objetRequis == "antidote")
+            {
+                compteurMaladie++;
+                Console.WriteLine(compteurMaladie);
+
+                if (compteurMaladie >= 100)
+                {
+                    if (argent > MALADIE_ARGENT)
                     {
-                       if (niveauMaisons[maisonTouche] > 0)
-                        {
-                            niveauMaisons[maisonTouche]--;
-                            AfficheNivMaisons(maisonTouche);
-                        }
-                        compteurFeu = 0;
+                        argent -= MALADIE_ARGENT;
+                        AfficheArgent();
                     }
+                    compteurMaladie = 0;
                 }
+            }
+            else if (catastrophe && objetRequis == "sceauEau")
+            {
+                compteurFeu++;
+                Console.WriteLine(compteurFeu);
+
+                if (compteurFeu >= 350)
+                {
+                    if (niveauMaisons[maisonTouche] > 0)
+                    {
+                        niveauMaisons[maisonTouche]--;
+                        AfficheNivMaisons(maisonTouche);
+                    }
+                    compteurFeu = 0;
+                }
+            }
+            else if (!catastrophe)
+            {
+                compteurDeclencheFoudre++;
+                if(compteurDeclencheFoudre == tpsDeclencheFoudre)
+                {
+                    Foudre();
+                    tpsDeclencheFoudre = DeclencheFoudre();
+                    compteurDeclencheFoudre = 0;
+                }
+                    
+            }
 
             
         }
@@ -535,7 +553,7 @@ namespace SAE_101
                 Tornade();
 
             if (e.Key == Key.A)
-                Antidote();
+                Maladie();
 
             if (e.Key == Key.E)
                 Feu();
@@ -757,14 +775,16 @@ namespace SAE_101
 
         private void Tornade()
         {
+            lab_catastrophe.Content = "Tornade en cours";
             Console.WriteLine("tornade");
             objetRequis = "antiTornade";
             catastrophe = true;
 
         }
 
-        private void Antidote()
+        private void Maladie()
         {
+            lab_catastrophe.Content = "Le village est malade";
             Console.WriteLine("Maladie");
             objetRequis = "antidote";
             catastrophe = true;
@@ -772,6 +792,7 @@ namespace SAE_101
 
         private void Foudre()
         {
+            lab_catastrophe.Content = "La fourdre s'est abbattu";
             objetRequis = "paratonnerre";
             catastrophe = true;
             usineTouche = rdn.Next(0, 5);
@@ -818,6 +839,7 @@ namespace SAE_101
 
         private void Feu()
         {
+            lab_catastrophe.Content = "incendie en cours";
             objetRequis = "sceauEau";
             catastrophe = true;
             maisonTouche = rdn.Next(0, 5);
@@ -999,5 +1021,13 @@ namespace SAE_101
                 labNiveauMaisonFuture.Content = "Niveau " + niveauMaisons[4].ToString();
             }
         }
+
+        private static int DeclencheFoudre()
+        {
+            int declencheurF = rdn.Next(UNE_MINUTE_EN_TICK, TROIS_MINUTES_EN_TICK + 1);
+            return declencheurF;
+        }
+
+        
     }
 }
