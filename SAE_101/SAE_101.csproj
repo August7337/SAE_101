@@ -13,13 +13,18 @@
     <None Remove="img\background.png" />
     <None Remove="img\cimenterie.png" />
     <None Remove="img\decharge.png" />
+    <None Remove="img\demarrer.ico" />
     <None Remove="img\futuriste.png" />
     <None Remove="img\magasinImage.jpg" />
     <None Remove="img\magasinMenu.png" />
     <None Remove="img\mairie.png" />
     <None Remove="img\menuAccueil.png" />
     <None Remove="img\menuMagasinProtection.png" />
+    <None Remove="img\sacEnPapier.ico" />
     <None Remove="img\scierie.png" />
+    <None Remove="img\shop.ico" />
+    <None Remove="img\trophee.ico" />
+    <None Remove="img\village.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,13 +32,18 @@
     <Resource Include="img\carriere.png" />
     <Resource Include="img\cimenterie.png" />
     <Resource Include="img\decharge.png" />
+    <Resource Include="img\demarrer.ico" />
     <Resource Include="img\futuriste.png" />
     <Resource Include="img\magasinImage.jpg" />
     <Resource Include="img\magasinMenu.png" />
     <Resource Include="img\mairie.png" />
     <Resource Include="img\menuAccueil.png" />
     <Resource Include="img\menuMagasinProtection.png" />
+    <Resource Include="img\sacEnPapier.ico" />
     <Resource Include="img\scierie.png" />
+    <Resource Include="img\shop.ico" />
+    <Resource Include="img\trophee.ico" />
+    <Resource Include="img\village.ico" />
   </ItemGroup>
 
   <ItemGroup>

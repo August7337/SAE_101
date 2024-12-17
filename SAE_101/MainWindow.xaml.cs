@@ -34,11 +34,11 @@ namespace SAE_101
         int argentParSecond = 1;
         double prixMairie = 10;
 
-        double[] ressources = [0,0,0,0,0];
+        int[] ressources = [0,0,0,0,0];
 
         int niveauCarriere = 1;
         double prixCarriere = 5;
-        double pierreParClick = 1;
+        int pierreParClick = 1;
         int pierreParSeconde = 1;
 
         int niveauScierie = 1;
@@ -337,7 +337,7 @@ namespace SAE_101
 
         private void but_marche_Click(object sender, RoutedEventArgs e)
         {
-            Magasin menu_magasin = new Magasin();
+            Marche menu_magasin = new Marche();
             menu_magasin.ressources = ressources; 
             menu_magasin.argent = argent;
             menu_magasin.ShowDialog();
@@ -384,7 +384,8 @@ namespace SAE_101
                 if (menu_defense.DialogResult == true)
                 {
                     achatDefense = menu_defense.achat;
-                    Console.WriteLine("Exit");
+                    argent = menu_defense.argent;
+                    lab_argent.Content = argent + " €";
                     Console.WriteLine(achatDefense);
                 }
             }

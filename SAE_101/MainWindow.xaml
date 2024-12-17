@@ -8,7 +8,8 @@
     Title="Village Tycoon"
     Width="960"
     Height="540"
-    mc:Ignorable="d" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyUp="Window_KeyUp">
+    Icon="/img/village.ico"
+    mc:Ignorable="d" KeyDown="Window_KeyDown" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyUp="Window_KeyUp">
     <Window.Background>
         <ImageBrush ImageSource="/img/background.png" Stretch="Fill"/>
     </Window.Background>
@@ -349,7 +350,7 @@ Content="" Cursor="Hand" Width="120" Focusable="False" >
                     </TransformGroup>
                 </Slider.RenderTransform>
             </Slider>
-            <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="50" Canvas.Top="442" VerticalAlignment="Center"/>
+            <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="47" Canvas.Top="442" VerticalAlignment="Center"/>
         </Canvas>
 
     </Grid>

@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 namespace SAE_101
 {
     /// <summary>
-    /// Logique d'interaction pour Magasin.xaml
+    /// Logique d'interaction pour Marche.xaml
     /// </summary>
 
-    public partial class Magasin : Window
+    public partial class Marche : Window
     {
         static readonly double PRIX_PIERRE = 0.5;
         static readonly double PRIX_BOIS = 1;
@@ -27,22 +27,22 @@ namespace SAE_101
         static readonly double PRIX_FUTUR = 10;
 
         int quantite = 1;
-        public int indice;
-        public double argent,ressource,prixVente;
-        public double[] ressources;
+        public int indice,ressource;
+        public double argent,prixVente;
+        public int[] ressources;
         double prixTotal = 0;
         bool verifSaisie;
+        bool max = false; // A chaque ouverture de la fenêtre, on suppose que l'utilisateur ne veut pas vendre tout son stock d'une ressource 
 
-        public Magasin()
+        public Marche()
         {
             InitializeComponent();
             box_qte.Text = quantite.ToString();
-            quantite = 1;
         }
 
         private void but_vendre_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(argent);
+            verifSaisie = int.TryParse(box_qte.Text, out quantite);
             if (liste_materiaux.SelectedItem == null) // condition vérifiant si l'utilisateur à bien choisi une resssource
             {
                 MessageBox.Show(this,"Erreur, vous n'avez sélectionné aucune ressource","Erreur",MessageBoxButton.OK, MessageBoxImage.Error);
@@ -61,31 +61,36 @@ namespace SAE_101
                 Console.WriteLine(materiaux);
                 switch (materiaux)  // switch permettant de connaître la ressource que l'utilisateur souhaite vendre
                 {
-                    case "pierre":
+                    case "Pierre (0.5€)":
                         indice = 0;
                         ressource = ressources[indice];
                         prixVente = PRIX_PIERRE;
                         break;
-                    case "bois":
+                    case "Bois (1€)":
                         indice = 1;
                         ressource = ressources[indice];
                         prixVente = PRIX_BOIS;
                         break;
-                    case "metal":
+                    case "Métal (2€)":
                         indice = 2;
                         ressource = ressources[indice];
                         prixVente = PRIX_METAL;
                         break;
-                    case "ciment":
+                    case "Ciment (5€)":
                         indice = 3;
                         ressource = ressources[indice];
                         prixVente = PRIX_CIMENT;
                         break;
-                    case "futur":
+                    case "Futur (10€)":
                         indice = 4;
                         ressource = ressources[indice];
                         prixVente = PRIX_FUTUR;
                         break;
+                }
+                if (max == true)
+                {
+                    quantite = ressource; // on écrase le contenu de la variable quantité par le stock de la ressource choisi 
+                    box_qte.Text = ressource.ToString();
                 }
                 if (ressource - quantite < 0)
                 {
@@ -112,18 +117,6 @@ namespace SAE_101
                 }
             }
         }
-            
-
-        private void but_plus_Click(object sender, RoutedEventArgs e)
-        {
-            verifSaisie = int.TryParse(box_qte.Text,out quantite);
-            if (verifSaisie)
-            {
-                quantite++;
-            }    
-            box_qte.Text = quantite.ToString();   
-        }
-
 
         private void but_moins_Click(object sender, RoutedEventArgs e)
         {
@@ -139,10 +132,28 @@ namespace SAE_101
             }
         }
 
-
-        private void box_qte_LostFocus(object sender, RoutedEventArgs e)
+        private void but_plus_Click(object sender, RoutedEventArgs e)
         {
-            verifSaisie = int.TryParse(box_qte.Text, out quantite); // une fois la quantité entrée, dès que l'on va cliquer sur un autre bouton de la fenêtre, la variable quantité contiendra la valeur entrée dans la box de quantité
+            verifSaisie = int.TryParse(box_qte.Text, out quantite);
+            if (verifSaisie)
+            {
+                quantite++;
+            }
+            box_qte.Text = quantite.ToString();
+        }
+
+        private void but_max_vente_Click(object sender, RoutedEventArgs e)
+        {
+            max = true;  // ce booléen permet d'écraser la valeur de la variable quantité par la quantité possédé de la ressource choisie
+            but_vendre_Click(sender, e);
+        }
+
+        private void marche_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                but_vendre_Click(sender,e); // appuyer sur la touche espace équivaut à clier sur le bouton vendre
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

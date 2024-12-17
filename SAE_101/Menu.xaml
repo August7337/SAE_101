@@ -9,9 +9,10 @@
     Title="Menu principal"
     Width="400"
     Height="400"
+    Icon="/img/demarrer.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d" KeyDown="menu_accueil_KeyDown">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="img/menuAccueil.png" />
@@ -61,7 +62,7 @@
             Content="version 1.0"
             Foreground="White"
             RenderTransformOrigin="0.329,0.464" Background="#84000000" />
-        <Slider x:Name="barre_volume" HorizontalAlignment="Left" Margin="8,340,0,0" VerticalAlignment="Top" Width="120" Background="#840B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50">
+        <Slider x:Name="barre_volume" HorizontalAlignment="Left" Margin="8,340,0,0" VerticalAlignment="Top" Width="120" Background="#CC0B0B0B" Foreground="White" ValueChanged="barre_volume_ValueChanged" RenderTransformOrigin="0.5,0.5" Maximum="100" SmallChange="0" Value="50">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -71,7 +72,7 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-        <Label x:Name="lab_volume" Content="Volume" HorizontalAlignment="Left" Margin="38,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.541" Background="#84000000" Foreground="White"/>
+        <Label x:Name="lab_volume" Content="Volume" HorizontalAlignment="Left" Margin="38,312,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.541" Background="#CC000000" Foreground="White"/>
 
     </Grid>
 </Window>
