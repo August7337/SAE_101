@@ -28,6 +28,8 @@ namespace SAE_101
     {
         static readonly double TORNADE_ARGENT = 0.05;
         static readonly double TORNADE_RESSOURCES = 0.10;
+        static readonly int PAS_MOUVEMENT = 3;
+
         double argent = 0;
         int niveauMairie = 1;
         double argentParClick = 1;
@@ -61,6 +63,9 @@ namespace SAE_101
         int futurParClick = 1;
         int futurParSecond = 1;
 
+        int niveauMaisonPierre = 0;
+        int prixMaisonPierre = 50;
+
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
 
@@ -72,7 +77,8 @@ namespace SAE_101
         string achatDefense;
         bool catastrophe = false;
 
-
+        bool droite;
+        bool gauche;
 
         public MainWindow()
         {
@@ -119,7 +125,7 @@ namespace SAE_101
         private void InitMinuteur()
         {
             minuteur = new DispatcherTimer();
-            minuteur.Interval = TimeSpan.FromMilliseconds(20);
+            minuteur.Interval = TimeSpan.FromMilliseconds(16);
             minuteur.Tick += minuteurTick;
             minuteur.Start();
         }
@@ -128,15 +134,37 @@ namespace SAE_101
         {
             conteur++;
 
+            if (droite)
+            {
+                Canvas.SetLeft(stackCarriere, Canvas.GetLeft(stackCarriere) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackCimenterie, Canvas.GetLeft(stackCimenterie) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackDecharge, Canvas.GetLeft(stackDecharge) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackFuturiste, Canvas.GetLeft(stackFuturiste) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonPierre, Canvas.GetLeft(stackMaisonPierre) - PAS_MOUVEMENT);
+            }
+
+            if (gauche)
+            {
+                Canvas.SetLeft(stackCarriere, Canvas.GetLeft(stackCarriere) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackCimenterie, Canvas.GetLeft(stackCimenterie) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackDecharge, Canvas.GetLeft(stackDecharge) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackFuturiste, Canvas.GetLeft(stackFuturiste) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMairie, Canvas.GetLeft(stackMairie) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackScierie, Canvas.GetLeft(stackScierie) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonPierre, Canvas.GetLeft(stackMaisonPierre) + PAS_MOUVEMENT);
+            }
+
             if (conteur >= 20)
             {
                 if (niveauMairie >= 10)
                 {
-                    argent += argentParSecond;
+                    argent += argentParSecond * (1 + (double)niveauMaisonPierre/10);
                     lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
 
                     Point relativePosition = mairie.TransformToAncestor(this).Transform(new Point(0, 0));
-                    AfficherTexte(relativePosition, "+" + argentParSecond + " €");
+                    AfficherTexte(relativePosition, "+" + argentParSecond * (1 + (double)niveauMaisonPierre / 10) + " €");
                 }
 
                 if (niveauCarriere >= 10)
@@ -391,6 +419,22 @@ namespace SAE_101
                 argent += 100000;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
+
+            if (e.Key == Key.Right)
+                droite = true;
+
+            if (e.Key == Key.Left)
+                gauche = true;
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right)
+                droite = false;
+
+            if (e.Key == Key.Left)
+                gauche = false;
+        }
             //essai IA
 
             if (e.Key == Key.T)
@@ -563,6 +607,36 @@ namespace SAE_101
                 buttonAchatFuturiste.Content = "Amélioration " + prixFuturiste.ToString("C", CultureInfo.CurrentCulture);
                 labNiveauFuturiste.Content = "Niveau " + niveauFuturiste.ToString();
             }
+        }
+
+        private void button_Click_Achat_Maison_Pierre(object sender, RoutedEventArgs e)
+        {
+            if (ressources[0] >= prixMaisonPierre)
+            {
+                ressources[0] -= prixMaisonPierre;
+                niveauMaisonPierre++;
+                prixMaisonPierre = (int)(prixMaisonPierre * 1.25);
+                lab_pierre.Content = ressources[0].ToString();
+                buttonAchatMaisonPierre.Content = "Ammelioration " + prixMaisonPierre.ToString();
+                labNiveauMaisonPierre.Content = "Niveau " + niveauMaisonPierre.ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Pierre_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixFuturiste)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (ressources[0] * (1 - 1.25)) / prixMaisonPierre) / Math.Log(1.25));
+                int totalCost = (int)(prixMaisonPierre * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
+
+                niveauMaisonPierre += achatsMax;
+                ressources[0] -= totalCost;
+                prixMaisonPierre = (int)(prixMaisonPierre * Math.Pow(1.25, achatsMax));
+                lab_pierre.Content = ressources[0].ToString();
+                buttonAchatMaisonPierre.Content = "Ammelioration " + prixMaisonPierre.ToString();
+                labNiveauMaisonPierre.Content = "Niveau " + niveauMaisonPierre.ToString();
+            }
+        }
 
         }
 
