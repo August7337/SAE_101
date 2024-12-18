@@ -248,6 +248,60 @@ namespace SAE_101
                     Point relativePosition = futuriste.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + futurParSecond);
                 }
+
+                if (niveauMaisons[0] >= 10)
+                {
+                    ressources[0] += niveauMaisons[0];
+                    AfficheRessource(0);
+                    Point relativePosition = maisonPierre.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[0]);
+                }
+
+                if (niveauMaisons[1] >= 10)
+                {
+                    ressources[1] += niveauMaisons[1];
+                    AfficheRessource(2);
+                    Point relativePosition = maisonBois.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[1]);
+
+                }
+
+                if (niveauMaisons[2] >= 10)
+                {
+                    ressources[2] += niveauMaisons[2];
+                    AfficheRessource(2);
+                    Point relativePosition = maisonMetal.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[2]);
+
+
+                }
+
+                if (niveauMaisons[3] >= 10)
+                {
+                    ressources[3] += niveauMaisons[3];
+                    AfficheRessource(3);
+                    Point relativePosition = maisonCiment.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[3]);
+
+                }
+
+                if (niveauMaisons[4] >= 10)
+                {
+                    ressources[4] += niveauMaisons[4];
+                    AfficheRessource(4);
+                    Point relativePosition = maisonFuturiste.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[4]);
+
+                }
+
+                if (niveauMaisons[5] >= 10)
+                {
+                    argent += niveauMaisons[5];
+                    AfficheArgent();
+                    Point relativePosition = maisonOr.TransformToAncestor(this).Transform(new Point(0, 0));
+                    AfficherTexte(relativePosition, "+" + niveauMaisons[5] + " €");
+
+                }
                 compteurTick = 0;
             }
 
@@ -325,7 +379,7 @@ namespace SAE_101
                 compteurDeclenche++;
                 if (compteurDeclenche == tpsDeclenche)
                 {
-                    int probabilite = rdn.Next(0, 4); // intervalle de 10 (de 0 à 9)
+                    int probabilite = rdn.Next(0,5);
                     Console.WriteLine(probabilite);
                     switch (probabilite)
                     {
