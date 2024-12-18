@@ -33,6 +33,10 @@ namespace SAE_101
         static readonly int PAS_MOUVEMENT = 20;
         static readonly int UNE_MINUTE_EN_TICK = 1000; //3750
         static readonly int TROIS_MINUTES_EN_TICK = 2000; // 11250
+        // API
+        private static readonly HttpClient CLIENT = new HttpClient();
+        private static readonly string BASE_URL = "http://au.fire-hosting.net:25562";
+        bool appelleAPI = false;
 
         double argent = 0;
         int niveauMairie = 1;
@@ -93,6 +97,7 @@ namespace SAE_101
         int usineTouche, niveauReelUsine; // niveauReelUsine va stocker le niveau de l'usine choisi par le random 
         int maisonTouche;
         double prixTornade = 0, ressourcesEnMoins = 0;
+        private DateTime tempsDepuisDebut;
 
         bool droite;
         bool gauche;
@@ -122,6 +127,7 @@ namespace SAE_101
             musique.Play();
         }
 
+        // Met le volume de la musique a un certain pourcentage (volume)
         public static void VolumeMusique(double volume)
         {
             musique.Volume = volume / 100;
@@ -145,12 +151,18 @@ namespace SAE_101
             minuteur.Tick += minuteurTick;
             minuteur.Start();
             minuteurEvent = new DispatcherTimer();
-
+            tempsDepuisDebut = DateTime.Now;
         }
 
         private void minuteurTick(object? sender, EventArgs e)
         {
             compteurTick++;
+
+            if (niveauMaisons[5] >= 10 && !appelleAPI) // Regarde si la maison en Or est passé niveau 10
+            {    
+                AppelleAuto();
+                appelleAPI = true;
+            }
 
             if (droite)
             {
@@ -364,7 +376,7 @@ namespace SAE_101
             else if (!catastrophe)
             {
                 compteurDeclenche++;
-                if(compteurDeclenche == tpsDeclenche)
+                if (compteurDeclenche == tpsDeclenche)
                 {
                     int probabilite = rdn.Next(0,5);
                     Console.WriteLine(probabilite);
@@ -389,16 +401,10 @@ namespace SAE_101
 
                         default: break;
                     }
-
                     tpsDeclenche = TempsDeclencheEvent();
                     compteurDeclenche = 0;
-
-
                 }
-                    
             }
-
-            
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
@@ -649,7 +655,7 @@ namespace SAE_101
                 gauche = false;
 
         }
-      
+
         private void button_Click_Decharge(object sender, RoutedEventArgs e)
         {
             ressources[2] += metalParClick;
@@ -877,7 +883,7 @@ namespace SAE_101
                 case 1:
                     scierie.IsEnabled = false;
                     buttonAchatScierie.IsEnabled = false;
-                    buttonAchatScierieMax.IsEnabled = false;    
+                    buttonAchatScierieMax.IsEnabled = false;
                     niveauReelUsine = niveauScierie;
                     niveauScierie = 0;
                     break;
@@ -889,16 +895,16 @@ namespace SAE_101
                     niveauDecharge = 0;
                     break;
                 case 3:
-                    cimenterie.IsEnabled= false;
+                    cimenterie.IsEnabled = false;
                     buttonAchatCimenterie.IsEnabled = false;
-                    buttonAchatCimenterieMax.IsEnabled=false;
+                    buttonAchatCimenterieMax.IsEnabled = false;
                     niveauReelUsine = niveauCimenterie;
                     niveauCimenterie = 0;
                     break;
                 case 4:
                     futuriste.IsEnabled = false;
-                    buttonAchatFuturiste.IsEnabled=false;
-                    buttonAchatFuturisteMax.IsEnabled=false;
+                    buttonAchatFuturiste.IsEnabled = false;
+                    buttonAchatFuturisteMax.IsEnabled = false;
                     niveauReelUsine = niveauFuturiste;
                     niveauFuturiste = 0;
                     break;
@@ -912,7 +918,7 @@ namespace SAE_101
             catastrophe = true;
             maisonTouche = rdn.Next(0, 6);
         }
- 
+
         private void ArretCatastrophe()
         {
             if (achatDefense == objetRequis)
@@ -959,7 +965,6 @@ namespace SAE_101
                     }
                 }
             }
-
             else
             {
                 MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -971,7 +976,6 @@ namespace SAE_101
             catastrophe = false;
             minuteurEvent.Stop();
         }
-
 
         private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
         {
@@ -1122,6 +1126,41 @@ namespace SAE_101
         {
             int declencheur = rdn.Next(UNE_MINUTE_EN_TICK, TROIS_MINUTES_EN_TICK + 1);
             return declencheur;
+        }
+
+        private async void AppelleAuto()
+        {
+            if (Classement.joueurActuel != null)
+            {
+                var joueur = new { Nom = Classement.joueurActuel.Nom, Temps = (int)(DateTime.Now - tempsDepuisDebut).TotalSeconds };
+                await MiseAJourJoueur(joueur);
+            }
+        }
+
+        // Appelle API vers le serveur
+        private async Task MiseAJourJoueur(object user)
+        {
+            string url = $"{BASE_URL}/user";
+            var json = JsonSerializer.Serialize(user);
+            Console.WriteLine(json);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage response = await CLIENT.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Utilisateur ajouté ou mis à jour avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Erreur : {response.StatusCode}\n{await response.Content.ReadAsStringAsync()}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
