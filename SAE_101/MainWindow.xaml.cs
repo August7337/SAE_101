@@ -41,7 +41,7 @@ namespace SAE_101
         double prixMairie = 10;
 
         int[] ressources = [0, 0, 0, 0, 0];
-        int[] niveauMaisons = [0, 0, 0, 0, 0];
+        int[] niveauMaisons = [0, 0, 0, 0, 0, 0];
 
         int niveauCarriere = 1;
         double prixCarriere = 5;
@@ -73,6 +73,7 @@ namespace SAE_101
         int prixMaisonMetal = 50;
         int prixMaisonCiment = 50;
         int prixMaisonFuture = 50;
+        int prixMaisonOr = 1000000;
 
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
@@ -164,6 +165,7 @@ namespace SAE_101
                 Canvas.SetLeft(stackMaisonMetal, Canvas.GetLeft(stackMaisonMetal) - PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonCiment, Canvas.GetLeft(stackMaisonCiment) - PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonFuture, Canvas.GetLeft(stackMaisonFuture) - PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonOr, Canvas.GetLeft(stackMaisonOr) - PAS_MOUVEMENT);
             }
 
             if (gauche)
@@ -179,13 +181,14 @@ namespace SAE_101
                 Canvas.SetLeft(stackMaisonMetal, Canvas.GetLeft(stackMaisonMetal) + PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonCiment, Canvas.GetLeft(stackMaisonCiment) + PAS_MOUVEMENT);
                 Canvas.SetLeft(stackMaisonFuture, Canvas.GetLeft(stackMaisonFuture) + PAS_MOUVEMENT);
+                Canvas.SetLeft(stackMaisonOr, Canvas.GetLeft(stackMaisonOr) + PAS_MOUVEMENT);
             }
 
             if (compteur >= 20)
             {
                 if (niveauMairie >= 10)
                 {
-                    double calcule = argentParSecond * (1 + (double)niveauMaisons[0] / 10) * (1 + (double)niveauMaisons[1] / 10) * (1 + (double)niveauMaisons[2] / 10) * (1 + (double)niveauMaisons[3] / 10) * (1 + (double)niveauMaisons[4] / 10);
+                    double calcule = argentParSecond * (1 + (double)niveauMaisons[0] / 10) * (1 + (double)niveauMaisons[1] / 10) * (1 + (double)niveauMaisons[2] / 10) * (1 + (double)niveauMaisons[3] / 10) * (1 + (double)niveauMaisons[4] / 10) * (1 + (double)niveauMaisons[5] / 10);
                     argent += calcule;
                     lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
 
@@ -1022,12 +1025,39 @@ namespace SAE_101
             }
         }
 
+        private void button_Click_Achat_Maison_Or(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixMaisonOr)
+            {
+                argent -= prixMaisonOr;
+                niveauMaisons[5]++;
+                prixMaisonOr = (int)(prixMaisonOr * 1.25);
+                lab_argent.Content = argent.ToString();
+                buttonAchatMaisonOr.Content = "Ammelioration " + prixMaisonOr.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauMaisonOr.Content = "Niveau " + niveauMaisons[5].ToString();
+            }
+        }
+
+        private void button_Click_Achat_Maison_Or_Max(object sender, RoutedEventArgs e)
+        {
+            if (argent >= prixMaisonFuture)
+            {
+                int achatsMax = (int)Math.Floor(Math.Log(1 - (argent * (1 - 1.25)) / prixMaisonOr) / Math.Log(1.25));
+                int totalCost = (int)(prixMaisonOr * (1 - Math.Pow(1.25, achatsMax)) / (1 - 1.25));
+
+                niveauMaisons[5] += achatsMax;
+                argent -= totalCost;
+                prixMaisonOr = (int)(prixMaisonOr * Math.Pow(1.25, achatsMax));
+                lab_argent.Content = argent.ToString();
+                buttonAchatMaisonOr.Content = "Ammelioration " + prixMaisonOr.ToString("C", CultureInfo.CurrentCulture);
+                labNiveauMaisonOr.Content = "Niveau " + niveauMaisons[5].ToString();
+            }
+        }
+
         private static int DeclencheFoudre()
         {
             int declencheurF = rdn.Next(UNE_MINUTE_EN_TICK, TROIS_MINUTES_EN_TICK + 1);
             return declencheurF;
         }
-
-        
     }
 }
