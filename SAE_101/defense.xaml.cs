@@ -22,9 +22,9 @@ namespace SAE_101
     public partial class Defense : Window
     {
         static readonly int PRIX_ANTI_TORNADE = 5000;
-        static readonly int PRIX_ANTIDOTE = 5000;
-        static readonly int PRIX_SCEAU_EAU = 5000;
-        static readonly int PRIX_PARATONNERRE = 5000;
+        static readonly int PRIX_ANTIDOTE = 1000;
+        static readonly int PRIX_SCEAU_EAU = 500;
+        static readonly int PRIX_PARATONNERRE = 10000;
         
         public double argent;
         public string achat;

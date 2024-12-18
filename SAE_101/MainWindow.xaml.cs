@@ -31,8 +31,8 @@ namespace SAE_101
         static readonly double TORNADE_RESSOURCES = 0.10;
         static readonly int MALADIE_ARGENT = 50;
         static readonly int PAS_MOUVEMENT = 20;
-        static readonly int UNE_MINUTE_EN_TICK = 500; //3750
-        static readonly int TROIS_MINUTES_EN_TICK = 1000; // 11250
+        static readonly int UNE_MINUTE_EN_TICK = 1000; //3750
+        static readonly int TROIS_MINUTES_EN_TICK = 2000; // 11250
 
         double argent = 0;
         int niveauMairie = 1;
@@ -78,14 +78,14 @@ namespace SAE_101
         DispatcherTimer minuteur;
         DispatcherTimer minuteurEvent;
 
-        int compteur = 0, compteurTonnerre = 0, compteurMaladie = 0, compteurFeu = 0, compteurDeclencheFoudre = 0;
+        int compteur = 0, compteurTick = 0, compteurTonnerre = 0, compteurMaladie = 0, compteurFeu = 0, compteurDeclenche = 0;
         int compteurDeclencheMaladie = 0;
         private static MediaPlayer musique;
         double volume = 50;
         bool premierPassage = true;
 
 
-        int tpsDeclencheFoudre;
+        int tpsDeclenche;
         string achatDefense;
         bool catastrophe = false;
         string objetRequis = ""; // permet de vérifier si l'objet acheté pour contre une catastrophe est le bon 
@@ -105,7 +105,7 @@ namespace SAE_101
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
             InitMinuteur();
-            tpsDeclencheFoudre = DeclencheFoudre();
+            tpsDeclenche = TempsDeclencheEvent();
         }
 
         public static void InitMusique()
@@ -150,7 +150,7 @@ namespace SAE_101
 
         private void minuteurTick(object? sender, EventArgs e)
         {
-            compteur++;
+            compteurTick++;
 
             if (droite)
             {
@@ -184,7 +184,7 @@ namespace SAE_101
                 Canvas.SetLeft(stackMaisonOr, Canvas.GetLeft(stackMaisonOr) + PAS_MOUVEMENT);
             }
 
-            if (compteur >= 20)
+            if (compteurTick >= 20)
             {
                 if (niveauMairie >= 10)
                 {
@@ -235,7 +235,7 @@ namespace SAE_101
                     Point relativePosition = futuriste.TransformToAncestor(this).Transform(new Point(0, 0));
                     AfficherTexte(relativePosition, "+" + futurParSecond);
                 }
-                compteur = 0;
+                compteurTick = 0;
             }
 
             if (catastrophe && objetRequis == "antiTornade")
@@ -243,7 +243,7 @@ namespace SAE_101
                 compteurTonnerre++;
                 Console.WriteLine(compteurTonnerre);
 
-                if (compteurTonnerre >= 500)
+                if (compteurTonnerre >= 1000)
                 {
                     prixTornade = Math.Round(argent * TORNADE_ARGENT, 0);
                     if (prixTornade < 1)
@@ -282,9 +282,7 @@ namespace SAE_101
             else if (catastrophe && objetRequis == "antidote")
             {
                 compteurMaladie++;
-                Console.WriteLine(compteurMaladie);
-
-                if (compteurMaladie >= 100)
+                if (compteurMaladie >= 300)
                 {
                     if (argent > MALADIE_ARGENT)
                     {
@@ -299,7 +297,7 @@ namespace SAE_101
                 compteurFeu++;
                 Console.WriteLine(compteurFeu);
 
-                if (compteurFeu >= 350)
+                if (compteurFeu >= 500)
                 {
                     if (niveauMaisons[maisonTouche] > 0)
                     {
@@ -311,12 +309,37 @@ namespace SAE_101
             }
             else if (!catastrophe)
             {
-                compteurDeclencheFoudre++;
-                if(compteurDeclencheFoudre == tpsDeclencheFoudre)
+                compteurDeclenche++;
+                if(compteurDeclenche == tpsDeclenche)
                 {
-                    Foudre();
-                    tpsDeclencheFoudre = DeclencheFoudre();
-                    compteurDeclencheFoudre = 0;
+                    int probabilite = rdn.Next(0,4); // intervalle de 10 (de 0 à 9)
+                    Console.WriteLine(probabilite);
+                    switch (probabilite)
+                    {
+                        case 0:
+                            lab_catastrophe.Content = "Tornade en cours";
+                            Tornade();
+                            break;
+                        case 1:
+                            lab_catastrophe.Content = "Le village est malade";
+                            Maladie();
+                            break;
+                        case 2:
+                            lab_catastrophe.Content = "Incendie en cours";
+                            Feu();
+                            break;
+                        case 3:
+                            lab_catastrophe.Content = "La foudre s'abat";
+                            Foudre();
+                            break;
+
+                        default: break;
+                    }
+
+                    tpsDeclenche = TempsDeclencheEvent();
+                    compteurDeclenche = 0;
+
+
                 }
                     
             }
@@ -489,6 +512,9 @@ namespace SAE_101
                 case 4:
                     labNiveauMaisonFuture.Content = "Niveau: " + niveauMaisons[4].ToString();
                     break;
+                case 5:
+                    labNiveauMaisonOr.Content = "Niveau: " + niveauMaisons[5].ToString();
+                    break;
                 default: break;
             }
         }
@@ -552,17 +578,6 @@ namespace SAE_101
                 argent += 100000;
                 lab_argent.Content = argent.ToString("C", CultureInfo.CurrentCulture);
             }
-            if (e.Key == Key.T)
-                Tornade();
-
-            if (e.Key == Key.A)
-                Maladie();
-
-            if (e.Key == Key.E)
-                Feu();
-
-            if (e.Key == Key.F)
-                Foudre();
 
             if (e.Key == Key.Right)
                 droite = true;
@@ -778,8 +793,8 @@ namespace SAE_101
 
         private void Tornade()
         {
+
             lab_catastrophe.Content = "Tornade en cours";
-            Console.WriteLine("tornade");
             objetRequis = "antiTornade";
             catastrophe = true;
 
@@ -787,15 +802,12 @@ namespace SAE_101
 
         private void Maladie()
         {
-            lab_catastrophe.Content = "Le village est malade";
-            Console.WriteLine("Maladie");
             objetRequis = "antidote";
             catastrophe = true;
         }
 
         private void Foudre()
         {
-            lab_catastrophe.Content = "La fourdre s'est abbattu";
             objetRequis = "paratonnerre";
             catastrophe = true;
             usineTouche = rdn.Next(0, 5);
@@ -842,10 +854,9 @@ namespace SAE_101
 
         private void Feu()
         {
-            lab_catastrophe.Content = "incendie en cours";
             objetRequis = "sceauEau";
             catastrophe = true;
-            maisonTouche = rdn.Next(0, 5);
+            maisonTouche = rdn.Next(0, 6);
         }
  
         private void ArretCatastrophe()
@@ -853,8 +864,8 @@ namespace SAE_101
             if (achatDefense == objetRequis)
             {
                 MessageBox.Show("La catastrophe s'est arrêté ! ", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
+                lab_catastrophe.Content = "";
                 catastrophe = false;
-                Console.WriteLine("Passage");
                 if (objetRequis == "paratonnerre")
                 {
                     switch (usineTouche)
@@ -905,7 +916,6 @@ namespace SAE_101
         {
             catastrophe = false;
             minuteurEvent.Stop();
-            Console.WriteLine("Passage");
         }
 
 
@@ -1054,10 +1064,10 @@ namespace SAE_101
             }
         }
 
-        private static int DeclencheFoudre()
+        private static int TempsDeclencheEvent()
         {
-            int declencheurF = rdn.Next(UNE_MINUTE_EN_TICK, TROIS_MINUTES_EN_TICK + 1);
-            return declencheurF;
+            int declencheur = rdn.Next(UNE_MINUTE_EN_TICK, TROIS_MINUTES_EN_TICK + 1);
+            return declencheur;
         }
     }
 }

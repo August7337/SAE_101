@@ -459,12 +459,12 @@ Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush
                 </Slider.RenderTransform>
             </Slider>
             <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="47" Canvas.Top="442" VerticalAlignment="Center"/>
-            <Label x:Name="lab_catastrophe" Content="" Canvas.Left="656" Canvas.Top="24" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="24" Width="209">
+            <Label x:Name="lab_catastrophe" Content="" Canvas.Left="658" Canvas.Top="18" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="28" Width="209">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-0.881"/>
+                        <RotateTransform Angle="-0.276"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Label.RenderTransform>
