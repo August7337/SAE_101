@@ -113,8 +113,8 @@
 
 
         <StackPanel>
-            <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40"/>
-            <Button x:Name="but_defense" Content="Magasin de protection" Height="40" Width="135" Click="but_defense_Click" Margin="150,-986,0,0"/>
+            <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40" Background="#FFA36C00" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+            <Button x:Name="but_defense" Content="Magasin de protection" Height="40" Width="135" Click="but_defense_Click" Margin="150,-986,0,0" Background="#FFA36C00" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
         </StackPanel>
 
 
