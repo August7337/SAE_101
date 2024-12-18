@@ -113,8 +113,8 @@
 
 
         <StackPanel>
-            <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40"/>
-            <Button x:Name="but_defense" Content="Magasin de protection" Height="40" Width="135" Click="but_defense_Click" Margin="150,-986,0,0"/>
+            <Button x:Name="but_marche" Content="Marché" Canvas.Left="716" Canvas.Top="26" Click="but_marche_Click" Width="84" HorizontalAlignment="Left" Margin="388,11,0,473" Height="40" Background="#FFA36C00" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
+            <Button x:Name="but_defense" Content="Magasin de protection" Height="40" Width="135" Click="but_defense_Click" Margin="150,-986,0,0" Background="#FFA36C00" Foreground="#FFE5DFCC" BorderBrush="#FF995400" />
         </StackPanel>
 
 
@@ -459,16 +459,7 @@ Content="Max" Cursor="Hand" Focusable="False" Foreground="#FFE5DFCC" BorderBrush
                 </Slider.RenderTransform>
             </Slider>
             <Label x:Name="lab_volume" Content="Volume" RenderTransformOrigin="0.66,0.464" Background="#84000000" Foreground="White" HorizontalAlignment="Left" Canvas.Left="47" Canvas.Top="442" VerticalAlignment="Center"/>
-            <Label x:Name="lab_catastrophe" Content="" Canvas.Left="658" Canvas.Top="18" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="28" Width="209">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-0.276"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
+            <Image x:Name="img_catastrophe" Canvas.Right="30" Canvas.Top="20" Width="50" Height="50" Source="/img/tornade.png" Visibility="Hidden" />
         </Canvas>
     </Grid>
 </Window>
