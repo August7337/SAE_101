@@ -127,6 +127,7 @@ namespace SAE_101
             musique.Play();
         }
 
+        // Met le volume de la musique a un certain pourcentage (volume)
         public static void VolumeMusique(double volume)
         {
             musique.Volume = volume / 100;
@@ -346,16 +347,10 @@ namespace SAE_101
 
                         default: break;
                     }
-
                     tpsDeclenche = TempsDeclencheEvent();
                     compteurDeclenche = 0;
-
-
                 }
-
             }
-
-
         }
 
         private void button_Click_Mairie(object sender, RoutedEventArgs e)
@@ -916,7 +911,6 @@ namespace SAE_101
                     }
                 }
             }
-
             else
             {
                 MessageBox.Show("Cet objet ne permet pas d'arrêter la catastrophe en cours", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -928,7 +922,6 @@ namespace SAE_101
             catastrophe = false;
             minuteurEvent.Stop();
         }
-
 
         private void button_Click_Achat_Maison_Bois(object sender, RoutedEventArgs e)
         {
@@ -1090,6 +1083,7 @@ namespace SAE_101
             }
         }
 
+        // Appelle API vers le serveur
         private async Task MiseAJourJoueur(object user)
         {
             string url = $"{BASE_URL}/user";
