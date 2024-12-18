@@ -9,9 +9,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="CLASSEMENT" HorizontalAlignment="Center" Margin="0,0,0,30" FontSize="24" />
+            <Label Content="Nom :"></Label>
             <TextBox x:Name="txtNom" />
-            <TextBox x:Name="txtTemps" />
-            <Button Content="Ajouter Utilisateur" Click="Button_AddUser_Click"/>
             <Button Content="Récupérer Utilisateurs" Click="Button_GetUsers_Click" />
             <ListBox x:Name="lstUsers" />
             <Button Content="OK" Click="btn_Click_Ok" />
