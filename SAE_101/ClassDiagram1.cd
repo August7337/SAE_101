@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SAE_101.MainWindow">
+    <Position X="0.5" Y="0.75" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>CAcDhQ1n1iBLrFIhGBSClAbvjUNDyNDvGaGwaUJC0ZM=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAE_101.Defense" Collapsed="true">
+    <Position X="15.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIgAAAggAAAAAAAIQAAABAAKAAAgAAAgI=</HashCode>
+      <FileName>Defense.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAE_101.Marche">
+    <Position X="9" Y="5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECgAAIAIAgQAAAAAAACgAAQSAQhCAAQBAAAQAAA=</HashCode>
+      <FileName>Marche.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAE_101.Menu" Collapsed="true">
+    <Position X="11.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAEAAAAAAAAAACAAAAAAQAAAAAAAACAAA=</HashCode>
+      <FileName>Menu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAE_101.Classement" Collapsed="true">
+    <Position X="10" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SAE_101.Classement.Joueur" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>classement.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAABAAAAQAAAAACAAACAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>classement.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
