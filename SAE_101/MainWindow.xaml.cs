@@ -39,6 +39,11 @@ namespace SAE_101
         private static readonly string BASE_URL = "http://au.fire-hosting.net:25562";
         bool appelleAPI = false;
 
+        BitmapImage tornadeImage;
+        BitmapImage maladieImage;
+        BitmapImage incendieImage;
+        BitmapImage foudreImage;
+
         double argent = 0;
         int niveauMairie = 1;
         double argentParClick = 1;
@@ -110,8 +115,17 @@ namespace SAE_101
             menu_accueil.ShowDialog(); // appel et afichage de la fenêtre menu d'acccueil
             if (menu_accueil.DialogResult == false)
                 Application.Current.Shutdown();
+            InitImages();
             InitMinuteur();
             tpsDeclenche = TempsDeclencheEvent();
+        }
+
+        private void InitImages()
+        {
+            tornadeImage = new BitmapImage(new Uri("pack://application:,,,/img/tornade.png"));
+            maladieImage = new BitmapImage(new Uri("pack://application:,,,/img/maladie.png"));
+            incendieImage = new BitmapImage(new Uri("pack://application:,,,/img/incendie.png"));
+            foudreImage = new BitmapImage(new Uri("pack://application:,,,/img/foudre.png"));
         }
 
         public static void InitMusique()
@@ -379,28 +393,31 @@ namespace SAE_101
                 compteurDeclenche++;
                 if (compteurDeclenche == tpsDeclenche)
                 {
-                    int probabilite = rdn.Next(0,5);
+                    int probabilite = rdn.Next(0, 5);
                     Console.WriteLine(probabilite);
+                    img_catastrophe.Visibility = Visibility.Visible; // Rendre l'image visible
                     switch (probabilite)
                     {
                         case 0:
-                            lab_catastrophe.Content = "Tornade en cours";
+                            img_catastrophe.Source = tornadeImage;
                             Tornade();
                             break;
                         case 1:
-                            lab_catastrophe.Content = "Le village est malade";
+                            img_catastrophe.Source = maladieImage;
                             Maladie();
                             break;
                         case 2:
-                            lab_catastrophe.Content = "Incendie en cours";
+                            img_catastrophe.Source = incendieImage;
                             Feu();
                             break;
                         case 3:
-                            lab_catastrophe.Content = "La foudre s'abat";
+                            img_catastrophe.Source = foudreImage;
                             Foudre();
                             break;
 
-                        default: break;
+                        default:
+                            img_catastrophe.Visibility = Visibility.Hidden; // Cacher l'image si aucune catastrophe
+                            break;
                     }
                     tpsDeclenche = TempsDeclencheEvent();
                     compteurDeclenche = 0;
@@ -855,7 +872,7 @@ namespace SAE_101
         private void Tornade()
         {
 
-            lab_catastrophe.Content = "Tornade en cours";
+            //lab_catastrophe.Content = "Tornade en cours";
             objetRequis = "antiTornade";
             catastrophe = true;
 
@@ -925,7 +942,7 @@ namespace SAE_101
             if (achatDefense == objetRequis)
             {
                 MessageBox.Show("La catastrophe s'est arrêté ! ", "Achat réussi", MessageBoxButton.OK, MessageBoxImage.Information);
-                lab_catastrophe.Content = "";
+                img_catastrophe.Visibility = Visibility.Hidden; // Masquer l'image
                 catastrophe = false;
                 if (objetRequis == "paratonnerre")
                 {
