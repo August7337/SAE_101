@@ -22,7 +22,7 @@ namespace SAE_101
     public partial class Classement : Window
     {
         private static readonly HttpClient CLIENT = new HttpClient();
-        private static readonly string BASE_URL = "http://au.fire-hosting.net:25562";
+        private static readonly string BASE_URL = "http://http://server.test";
         public static Joueur joueurActuel;
 
         public Classement()

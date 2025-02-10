@@ -36,7 +36,7 @@ namespace SAE_101
         static readonly double MULTIPLICATEUR_25 = 1.25;
         // API
         private static readonly HttpClient CLIENT = new HttpClient();
-        private static readonly string BASE_URL = "http://au.fire-hosting.net:25562";
+        private static readonly string BASE_URL = "http://server.test";
         bool appelleAPI = false;
 
         BitmapImage tornadeImage;
